@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="172" height="179" viewBox="0 0 172 179">
+  <g id="jobcan" transform="translate(-607.712 282.634)">
+    <g id="Ellipse_25" data-name="Ellipse 25" transform="translate(607.712 -274.634)" fill="red" stroke="#fff" stroke-width="7.5">
+      <ellipse cx="86" cy="85.5" rx="86" ry="85.5" stroke="none"/>
+      <ellipse cx="86" cy="85.5" rx="82.25" ry="81.75" fill="none"/>
+    </g>
+    <text id="_" data-name="!" transform="translate(691.712 -144.634)" fill="#fff" font-size="129" font-family="OpenSans-Bold, Open Sans" font-weight="700"><tspan x="-18.456" y="0">!</tspan></text>
+  </g>
+</svg>

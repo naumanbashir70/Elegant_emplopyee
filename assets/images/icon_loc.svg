@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="166" height="166" viewBox="0 0 166 166">
+  <g id="icon_loc" transform="translate(-1055 -802)">
+    <g id="Ellipse_22" data-name="Ellipse 22" transform="translate(1055 802)" fill="#fff" stroke="#ffc000" stroke-width="5">
+      <circle cx="83" cy="83" r="83" stroke="none"/>
+      <circle cx="83" cy="83" r="80.5" fill="none"/>
+    </g>
+    <path id="ic_location_on_24px" d="M39.387,2A34.362,34.362,0,0,0,5,36.387c0,25.79,34.387,63.861,34.387,63.861S73.774,62.177,73.774,36.387A34.362,34.362,0,0,0,39.387,2Zm0,46.668A12.281,12.281,0,1,1,51.668,36.387,12.285,12.285,0,0,1,39.387,48.668Z" transform="translate(1101 835.876)" fill="#ffc000" stroke="#000" stroke-width="5"/>
+  </g>
+</svg>
