@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 't2_clock_in_model.dart';
 export 't2_clock_in_model.dart';
 
@@ -59,6 +60,8 @@ class _T2ClockInWidgetState extends State<T2ClockInWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -197,7 +200,7 @@ class _T2ClockInWidgetState extends State<T2ClockInWidget> {
                   alignment: AlignmentDirectional(0.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(15.0, 40.0, 15.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(15.0, 30.0, 15.0, 0.0),
                     child: Container(
                       width: double.infinity,
                       height: 110.0,
@@ -422,11 +425,11 @@ class _T2ClockInWidgetState extends State<T2ClockInWidget> {
                 ),
                 Expanded(
                   child: Align(
-                    alignment: AlignmentDirectional(0.0, -1.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Builder(
                       builder: (context) => Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 40.0, 10.0, 0.0),
+                            10.0, 0.0, 10.0, 0.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -434,7 +437,7 @@ class _T2ClockInWidgetState extends State<T2ClockInWidget> {
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             _model.statusCheck = await ClockInStatusCall.call(
-                              apiToken: widget.apitoken,
+                              apiToken: FFAppState().tokenapi,
                             );
 
                             if ((_model.statusCheck?.succeeded ?? true)) {
@@ -632,7 +635,7 @@ class _T2ClockInWidgetState extends State<T2ClockInWidget> {
                   alignment: AlignmentDirectional(0.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,

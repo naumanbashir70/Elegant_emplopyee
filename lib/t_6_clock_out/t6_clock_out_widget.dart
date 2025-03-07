@@ -156,7 +156,7 @@ class _T6ClockOutWidgetState extends State<T6ClockOutWidget> {
                         EdgeInsetsDirectional.fromSTEB(15.0, 20.0, 15.0, 0.0),
                     child: Container(
                       width: double.infinity,
-                      height: 150.0,
+                      height: 155.0,
                       decoration: BoxDecoration(
                         color: Color(0x45000000),
                         borderRadius: BorderRadius.circular(10.0),
@@ -319,14 +319,16 @@ class _T6ClockOutWidgetState extends State<T6ClockOutWidget> {
                                           letterSpacing: 0.0,
                                         ),
                                   ),
-                                  Text(
-                                    FFAppState().BreakInTime,
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          letterSpacing: 0.0,
-                                        ),
+                                  Flexible(
+                                    child: Text(
+                                      FFAppState().BreakInTime,
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
                                   ),
                                 ],
                               ),

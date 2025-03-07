@@ -297,7 +297,7 @@ class _T5ReturnFromBreakWidgetState extends State<T5ReturnFromBreakWidget> {
                                         ),
                                   ),
                                   Text(
-                                    FFAppState().BreakOutTime,
+                                    '11:00 am',
                                     style: FlutterFlowTheme.of(context)
                                         .titleMedium
                                         .override(

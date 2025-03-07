@@ -11,7 +11,7 @@ class T1EnterPinGTBModel extends FlutterFlowModel<T1EnterPinGTBWidget> {
   FocusNode? pinCodeFocusNode;
   String? Function(BuildContext, String?)? pinCodeControllerValidator;
   // Stores action output result for [Backend Call - API (BreakOut)] action in Container widget.
-  ApiCallResponse? breakout;
+  ApiCallResponse? breakOut;
 
   @override
   void initState(BuildContext context) {

@@ -243,6 +243,11 @@ class _ResetWidgetState extends State<ResetWidget> {
                       activeColor: FlutterFlowTheme.of(context).primaryText,
                       inactiveColor: Colors.white,
                       selectedColor: Color(0xFFD2D2D2),
+                      activeFillColor: FlutterFlowTheme.of(context).primaryText,
+                      inactiveFillColor:
+                          FlutterFlowTheme.of(context).primaryText,
+                      selectedFillColor:
+                          FlutterFlowTheme.of(context).secondaryText,
                     ),
                     controller: _model.pinCodeController,
                     onChanged: (_) {},

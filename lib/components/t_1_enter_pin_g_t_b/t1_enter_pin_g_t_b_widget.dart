@@ -1,6 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/invalid_clock_i_n/invalid_clock_i_n_widget.dart';
-import '/components/invalid_pin/invalid_pin_widget.dart';
 import '/components/t_p_sucess_break/t_p_sucess_break_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -208,18 +207,18 @@ class _T1EnterPinGTBWidgetState extends State<T1EnterPinGTBWidget> {
                       onTap: () async {
                         if (_model.pinCodeController!.text ==
                             FFAppState().pin) {
-                          _model.breakout = await BreakOutCall.call(
+                          _model.breakOut = await BreakOutCall.call(
                             apiToken: FFAppState().tokenapi,
                           );
 
-                          if ((_model.breakout?.succeeded ?? true)) {
-                            FFAppState().BreakOutTime = getJsonField(
-                              (_model.breakout?.jsonBody ?? ''),
-                              r'''$.break_out_at''',
-                            ).toString();
+                          if ((_model.breakOut?.succeeded ?? true)) {
                             FFAppState().ClockInTime = getJsonField(
-                              (_model.breakout?.jsonBody ?? ''),
+                              (_model.breakOut?.jsonBody ?? ''),
                               r'''$.clocked_in_at''',
+                            ).toString();
+                            FFAppState().BreakOutTime = getJsonField(
+                              (_model.breakOut?.jsonBody ?? ''),
+                              r'''$.break_out_at''',
                             ).toString();
                             safeSetState(() {});
                             await showDialog(
@@ -260,7 +259,7 @@ class _T1EnterPinGTBWidgetState extends State<T1EnterPinGTBWidget> {
                                 backgroundColor: Colors.transparent,
                                 alignment: AlignmentDirectional(0.0, 0.0)
                                     .resolve(Directionality.of(context)),
-                                child: InvalidPinWidget(),
+                                child: InvalidClockINWidget(),
                               );
                             },
                           );

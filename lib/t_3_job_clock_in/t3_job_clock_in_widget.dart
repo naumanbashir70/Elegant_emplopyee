@@ -531,13 +531,13 @@ class _T3JobClockInWidgetState extends State<T3JobClockInWidget> {
                     ),
                   ),
                 if (_model.pinCodeController!.text != '')
-                  Expanded(
+                  Flexible(
                     child: Align(
-                      alignment: AlignmentDirectional(0.0, -1.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Builder(
                         builder: (context) => Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 50.0, 10.0, 0.0),
+                              10.0, 10.0, 10.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
@@ -757,7 +757,7 @@ class _T3JobClockInWidgetState extends State<T3JobClockInWidget> {
                     alignment: AlignmentDirectional(0.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 10.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,

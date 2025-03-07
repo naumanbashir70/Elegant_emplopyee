@@ -197,14 +197,14 @@ class _T4JobClockedInWidgetState extends State<T4JobClockedInWidget> {
                 Expanded(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Align(
                         alignment: AlignmentDirectional(0.0, -1.0),
                         child: Builder(
                           builder: (context) => Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 50.0, 10.0, 0.0),
+                                10.0, 30.0, 10.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
                               focusColor: Colors.transparent,
@@ -349,157 +349,146 @@ class _T4JobClockedInWidgetState extends State<T4JobClockedInWidget> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(0.0, -1.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 0.0, 10.0, 0.0),
-                            child: Container(
-                              decoration: BoxDecoration(),
-                              child: Builder(
-                                builder: (context) => InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    await ClockInStatusCall.call(
-                                      apiToken: FFAppState().tokenapi,
-                                    );
+                      Align(
+                        alignment: AlignmentDirectional(0.0, -1.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              10.0, 0.0, 10.0, 0.0),
+                          child: Container(
+                            decoration: BoxDecoration(),
+                            child: Builder(
+                              builder: (context) => InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  await ClockInStatusCall.call(
+                                    apiToken: FFAppState().tokenapi,
+                                  );
 
-                                    if (getJsonField(
-                                          (_model.clockstatus?.jsonBody ?? ''),
-                                          r'''$.allowed_for_clock_out''',
-                                        ) ==
-                                        getJsonField(
-                                          (_model.clockstatus?.jsonBody ?? ''),
-                                          r'''$.allowed_for_clock_out_status''',
-                                        )) {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return Dialog(
-                                            elevation: 0,
-                                            insetPadding: EdgeInsets.zero,
-                                            backgroundColor: Colors.transparent,
-                                            alignment: AlignmentDirectional(
-                                                    0.0, 0.0)
-                                                .resolve(
-                                                    Directionality.of(context)),
-                                            child: T2EnterClockOutWidget(
-                                              apitoken: FFAppState().tokenapi,
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'API Status Error',
-                                            style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                            ),
+                                  if (getJsonField(
+                                        (_model.clockstatus?.jsonBody ?? ''),
+                                        r'''$.allowed_for_clock_out''',
+                                      ) ==
+                                      getJsonField(
+                                        (_model.clockstatus?.jsonBody ?? ''),
+                                        r'''$.allowed_for_clock_out_status''',
+                                      )) {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (dialogContext) {
+                                        return Dialog(
+                                          elevation: 0,
+                                          insetPadding: EdgeInsets.zero,
+                                          backgroundColor: Colors.transparent,
+                                          alignment: AlignmentDirectional(
+                                                  0.0, 0.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          child: T2EnterClockOutWidget(
+                                            apitoken: FFAppState().tokenapi,
                                           ),
-                                          duration:
-                                              Duration(milliseconds: 4000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondary,
+                                        );
+                                      },
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'API Status Error',
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
                                         ),
-                                      );
-                                    }
-                                  },
-                                  child: Container(
-                                    width: 170.0,
-                                    height: 170.0,
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Color(0xFF7E4A49),
-                                          Color(0xFF311919),
-                                          Color(0xFF7E4A49),
-                                          Color(0xFF311919),
-                                          Color(0xFF7E4A49),
-                                          Color(0xFF311919)
-                                        ],
-                                        stops: [0.0, 0.0, 0.0, 0.6, 1.0, 1.0],
-                                        begin: AlignmentDirectional(1.0, -1.0),
-                                        end: AlignmentDirectional(-1.0, 1.0),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondary,
                                       ),
-                                      shape: BoxShape.circle,
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                  width: 170.0,
+                                  height: 170.0,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color(0xFF7E4A49),
+                                        Color(0xFF311919),
+                                        Color(0xFF7E4A49),
+                                        Color(0xFF311919),
+                                        Color(0xFF7E4A49),
+                                        Color(0xFF311919)
+                                      ],
+                                      stops: [0.0, 0.0, 0.0, 0.6, 1.0, 1.0],
+                                      begin: AlignmentDirectional(1.0, -1.0),
+                                      end: AlignmentDirectional(-1.0, 1.0),
                                     ),
-                                    child: Align(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                      child: Container(
-                                        width: 155.0,
-                                        height: 155.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 3.0,
-                                              color: Color(0x33000000),
-                                              offset: Offset(
-                                                0.0,
-                                                1.0,
-                                              ),
-                                            )
-                                          ],
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: Color(0x9C0C0C0C),
-                                            width: 6.0,
-                                          ),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Container(
+                                      width: 155.0,
+                                      height: 155.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 3.0,
+                                            color: Color(0x33000000),
+                                            offset: Offset(
+                                              0.0,
+                                              1.0,
+                                            ),
+                                          )
+                                        ],
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Color(0x9C0C0C0C),
+                                          width: 6.0,
                                         ),
+                                      ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Align(
                                         alignment:
                                             AlignmentDirectional(0.0, 0.0),
-                                        child: Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'Clock Out',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryBackground,
-                                                                fontSize: 26.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                              ),
-                                                    ),
-                                                  ],
-                                                ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    'Clock Out',
+                                                    textAlign: TextAlign.center,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
+                                                          fontSize: 26.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -510,7 +499,7 @@ class _T4JobClockedInWidgetState extends State<T4JobClockedInWidget> {
                           ),
                         ),
                       ),
-                    ].divide(SizedBox(height: 50.0)),
+                    ].divide(SizedBox(height: 10.0)),
                   ),
                 ),
                 Align(

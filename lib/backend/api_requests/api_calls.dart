@@ -943,7 +943,7 @@ class BreakOutCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'BreakOut',
-      apiUrl: 'http://18.141.200.126/employee-app-api//break-out',
+      apiUrl: 'http://18.141.200.126/employee-app-api/break-out',
       callType: ApiCallType.GET,
       headers: {},
       params: {
