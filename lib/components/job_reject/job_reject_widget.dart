@@ -43,8 +43,6 @@ class _JobRejectWidgetState extends State<JobRejectWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => JobRejectModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

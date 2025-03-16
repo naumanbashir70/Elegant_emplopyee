@@ -32,8 +32,6 @@ class _OtherJobWidgetState extends State<OtherJobWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => OtherJobModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

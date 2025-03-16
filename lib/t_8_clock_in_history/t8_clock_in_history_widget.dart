@@ -52,8 +52,6 @@ class _T8ClockInHistoryWidgetState extends State<T8ClockInHistoryWidget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

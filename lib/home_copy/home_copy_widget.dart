@@ -88,8 +88,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

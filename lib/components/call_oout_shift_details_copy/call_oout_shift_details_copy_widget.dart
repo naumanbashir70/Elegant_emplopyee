@@ -31,8 +31,6 @@ class _CallOoutShiftDetailsCopyWidgetState
     _model = createModel(context, () => CallOoutShiftDetailsCopyModel());
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

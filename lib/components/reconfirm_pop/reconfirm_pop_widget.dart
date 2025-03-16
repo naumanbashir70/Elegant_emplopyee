@@ -32,8 +32,6 @@ class _ReconfirmPopWidgetState extends State<ReconfirmPopWidget> {
       await Future.delayed(const Duration(milliseconds: 3000));
       Navigator.pop(context);
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

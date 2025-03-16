@@ -53,8 +53,6 @@ class _EnterPinTimeChangedACCEPTWidgetState
     _model = createModel(context, () => EnterPinTimeChangedACCEPTModel());
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

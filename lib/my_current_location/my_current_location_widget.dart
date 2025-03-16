@@ -53,8 +53,6 @@ class _MyCurrentLocationWidgetState extends State<MyCurrentLocationWidget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -56,8 +56,6 @@ class _EnterPinSimpleShiftWidgetState extends State<EnterPinSimpleShiftWidget> {
     _model.textFieldFocusNode ??= FocusNode();
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

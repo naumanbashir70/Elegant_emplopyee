@@ -33,8 +33,6 @@ class _UpPINConfPopupWidgetState extends State<UpPINConfPopupWidget> {
       await Future.delayed(const Duration(milliseconds: 7000));
       Navigator.pop(context);
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

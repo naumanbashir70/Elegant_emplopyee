@@ -33,8 +33,6 @@ class _MyPrefLocWidgetState extends State<MyPrefLocWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyPrefLocModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

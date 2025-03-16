@@ -30,8 +30,6 @@ class _NoteDetailWidgetState extends State<NoteDetailWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => NoteDetailModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

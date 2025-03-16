@@ -26,8 +26,6 @@ class _InvalidClockOUTCodeWidgetState extends State<InvalidClockOUTCodeWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => InvalidClockOUTCodeModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

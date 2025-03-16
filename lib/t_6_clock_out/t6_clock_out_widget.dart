@@ -34,8 +34,6 @@ class _T6ClockOutWidgetState extends State<T6ClockOutWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => T6ClockOutModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -52,8 +52,6 @@ class _MyWorkHistoryWidgetState extends State<MyWorkHistoryWidget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

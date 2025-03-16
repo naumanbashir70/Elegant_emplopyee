@@ -53,8 +53,6 @@ class _SearchJobCopyWidgetState extends State<SearchJobCopyWidget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

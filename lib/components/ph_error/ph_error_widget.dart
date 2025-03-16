@@ -26,8 +26,6 @@ class _PhErrorWidgetState extends State<PhErrorWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PhErrorModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

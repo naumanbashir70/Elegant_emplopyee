@@ -34,8 +34,6 @@ class _FullTimeJobDropWidgetState extends State<FullTimeJobDropWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => FullTimeJobDropModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

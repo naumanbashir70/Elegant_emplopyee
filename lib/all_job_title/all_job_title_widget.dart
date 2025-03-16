@@ -54,8 +54,6 @@ class _AllJobTitleWidgetState extends State<AllJobTitleWidget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

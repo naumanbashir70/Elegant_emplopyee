@@ -35,8 +35,6 @@ class _FullTimeJobWidgetState extends State<FullTimeJobWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => FullTimeJobModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

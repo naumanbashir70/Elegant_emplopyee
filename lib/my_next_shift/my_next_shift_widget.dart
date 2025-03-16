@@ -37,8 +37,6 @@ class _MyNextShiftWidgetState extends State<MyNextShiftWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyNextShiftModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

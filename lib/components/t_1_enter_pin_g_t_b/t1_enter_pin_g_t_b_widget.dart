@@ -37,8 +37,6 @@ class _T1EnterPinGTBWidgetState extends State<T1EnterPinGTBWidget> {
     _model = createModel(context, () => T1EnterPinGTBModel());
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -32,8 +32,6 @@ class _EmailConfirmPopWidgetState extends State<EmailConfirmPopWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EmailConfirmPopModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

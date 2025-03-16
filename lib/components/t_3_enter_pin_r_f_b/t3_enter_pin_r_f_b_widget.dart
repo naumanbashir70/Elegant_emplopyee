@@ -38,8 +38,6 @@ class _T3EnterPinRFBWidgetState extends State<T3EnterPinRFBWidget> {
     _model = createModel(context, () => T3EnterPinRFBModel());
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

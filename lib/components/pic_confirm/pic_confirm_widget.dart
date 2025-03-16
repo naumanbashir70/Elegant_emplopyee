@@ -26,8 +26,6 @@ class _PicConfirmWidgetState extends State<PicConfirmWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PicConfirmModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

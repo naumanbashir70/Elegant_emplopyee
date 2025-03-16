@@ -15,10 +15,10 @@ export 'home_model.dart';
 class HomeWidget extends StatefulWidget {
   const HomeWidget({
     super.key,
-    required this.apitoken,
-  });
+    String? apitoken,
+  }) : this.apitoken = apitoken ?? 'default';
 
-  final String? apitoken;
+  final String apitoken;
 
   static String routeName = 'home';
   static String routePath = '/home';
@@ -96,8 +96,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

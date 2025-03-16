@@ -43,8 +43,6 @@ class _EmailConfirmPopInfoWidgetState extends State<EmailConfirmPopInfoWidget> {
     _model.passwordFocusNode ??= FocusNode();
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

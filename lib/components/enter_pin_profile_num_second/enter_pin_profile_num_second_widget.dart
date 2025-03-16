@@ -41,8 +41,6 @@ class _EnterPinProfileNumSecondWidgetState
     _model = createModel(context, () => EnterPinProfileNumSecondModel());
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

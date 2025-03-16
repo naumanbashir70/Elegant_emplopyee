@@ -33,8 +33,6 @@ class _MyPrefDaysWidgetState extends State<MyPrefDaysWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyPrefDaysModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

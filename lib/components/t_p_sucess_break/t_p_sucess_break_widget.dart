@@ -43,8 +43,6 @@ class _TPSucessBreakWidgetState extends State<TPSucessBreakWidget> {
         }.withoutNulls,
       );
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -33,8 +33,6 @@ class _AddressConfirmWidgetState extends State<AddressConfirmWidget> {
       await Future.delayed(const Duration(milliseconds: 3000));
       Navigator.pop(context);
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

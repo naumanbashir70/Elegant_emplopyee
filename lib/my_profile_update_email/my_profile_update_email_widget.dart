@@ -38,8 +38,6 @@ class _MyProfileUpdateEmailWidgetState
 
     _model.emailupdateTextController ??= TextEditingController();
     _model.emailupdateFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

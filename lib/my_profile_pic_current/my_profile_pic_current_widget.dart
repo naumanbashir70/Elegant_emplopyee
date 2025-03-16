@@ -36,8 +36,6 @@ class _MyProfilePicCurrentWidgetState extends State<MyProfilePicCurrentWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyProfilePicCurrentModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

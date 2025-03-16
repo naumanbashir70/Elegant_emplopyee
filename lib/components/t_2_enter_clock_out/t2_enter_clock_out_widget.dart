@@ -38,8 +38,6 @@ class _T2EnterClockOutWidgetState extends State<T2EnterClockOutWidget> {
     _model = createModel(context, () => T2EnterClockOutModel());
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

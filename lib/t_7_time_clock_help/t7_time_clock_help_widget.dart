@@ -25,8 +25,6 @@ class _T7TimeClockHelpWidgetState extends State<T7TimeClockHelpWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => T7TimeClockHelpModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

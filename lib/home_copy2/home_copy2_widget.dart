@@ -97,8 +97,6 @@ class _HomeCopy2WidgetState extends State<HomeCopy2Widget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -74,8 +74,6 @@ class _MyPrefJobCondWidgetState extends State<MyPrefJobCondWidget>
           !anim.applyInitialState),
       this,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

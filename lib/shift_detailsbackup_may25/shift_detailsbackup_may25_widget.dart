@@ -42,8 +42,6 @@ class _ShiftDetailsbackupMay25WidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => ShiftDetailsbackupMay25Model());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

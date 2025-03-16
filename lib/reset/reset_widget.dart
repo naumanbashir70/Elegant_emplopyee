@@ -33,8 +33,6 @@ class _ResetWidgetState extends State<ResetWidget> {
     _model.emailFieldFocusNode ??= FocusNode();
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

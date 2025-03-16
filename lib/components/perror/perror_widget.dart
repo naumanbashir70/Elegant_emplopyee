@@ -26,8 +26,6 @@ class _PerrorWidgetState extends State<PerrorWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PerrorModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

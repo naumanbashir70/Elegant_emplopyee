@@ -26,8 +26,6 @@ class _WrongWidgetState extends State<WrongWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => WrongModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -32,8 +32,6 @@ class _PNumUpdateWidgetState extends State<PNumUpdateWidget> {
       await Future.delayed(const Duration(milliseconds: 2000));
       Navigator.pop(context);
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

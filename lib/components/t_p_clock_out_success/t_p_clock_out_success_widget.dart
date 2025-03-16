@@ -57,8 +57,6 @@ class _TPClockOutSuccessWidgetState extends State<TPClockOutSuccessWidget> {
         }.withoutNulls,
       );
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

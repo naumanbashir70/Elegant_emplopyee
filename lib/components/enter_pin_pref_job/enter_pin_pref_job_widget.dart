@@ -29,8 +29,6 @@ class _EnterPinPrefJobWidgetState extends State<EnterPinPrefJobWidget> {
     _model = createModel(context, () => EnterPinPrefJobModel());
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

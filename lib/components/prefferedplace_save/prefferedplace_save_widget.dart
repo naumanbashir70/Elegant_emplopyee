@@ -27,8 +27,6 @@ class _PrefferedplaceSaveWidgetState extends State<PrefferedplaceSaveWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PrefferedplaceSaveModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

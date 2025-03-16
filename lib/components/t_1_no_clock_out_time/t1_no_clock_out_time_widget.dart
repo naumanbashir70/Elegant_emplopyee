@@ -32,8 +32,6 @@ class _T1NoClockOutTimeWidgetState extends State<T1NoClockOutTimeWidget> {
     _model.textFieldFocusNode ??= FocusNode();
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

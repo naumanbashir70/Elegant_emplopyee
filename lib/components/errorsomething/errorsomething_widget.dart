@@ -36,8 +36,6 @@ class _ErrorsomethingWidgetState extends State<ErrorsomethingWidget> {
       await Future.delayed(const Duration(milliseconds: 4000));
       Navigator.pop(context);
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

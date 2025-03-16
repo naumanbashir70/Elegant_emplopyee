@@ -52,8 +52,6 @@ class _EnterPinReconfirmWidgetState extends State<EnterPinReconfirmWidget> {
     _model = createModel(context, () => EnterPinReconfirmModel());
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

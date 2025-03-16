@@ -52,8 +52,6 @@ class _NearMyHomeWidgetState extends State<NearMyHomeWidget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

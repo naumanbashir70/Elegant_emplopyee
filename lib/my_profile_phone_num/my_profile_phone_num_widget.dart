@@ -30,8 +30,6 @@ class _MyProfilePhoneNumWidgetState extends State<MyProfilePhoneNumWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyProfilePhoneNumModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

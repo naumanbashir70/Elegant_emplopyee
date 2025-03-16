@@ -52,8 +52,6 @@ class _RejectedJobsWidgetState extends State<RejectedJobsWidget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

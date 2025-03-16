@@ -29,8 +29,6 @@ class _T4EnterClockWBWidgetState extends State<T4EnterClockWBWidget> {
     _model = createModel(context, () => T4EnterClockWBModel());
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

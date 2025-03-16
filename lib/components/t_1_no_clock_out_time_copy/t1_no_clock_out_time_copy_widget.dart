@@ -39,8 +39,6 @@ class _T1NoClockOutTimeCopyWidgetState
     _model.textFieldFocusNode ??= FocusNode();
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

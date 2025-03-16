@@ -37,8 +37,6 @@ class _ShiftDetailsReconfirmWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => ShiftDetailsReconfirmModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

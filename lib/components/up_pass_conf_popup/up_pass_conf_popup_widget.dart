@@ -36,8 +36,6 @@ class _UpPassConfPopupWidgetState extends State<UpPassConfPopupWidget> {
 
       context.pushNamed(LoginWidget.routeName);
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

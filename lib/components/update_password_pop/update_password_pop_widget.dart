@@ -48,8 +48,6 @@ class _UpdatePasswordPopWidgetState extends State<UpdatePasswordPopWidget> {
 
     _model.newpasswordconfTextController ??= TextEditingController();
     _model.newpasswordconfFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -30,8 +30,6 @@ class _MyFavouriteWidgetState extends State<MyFavouriteWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyFavouriteModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

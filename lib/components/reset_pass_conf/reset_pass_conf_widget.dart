@@ -26,8 +26,6 @@ class _ResetPassConfWidgetState extends State<ResetPassConfWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ResetPassConfModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -52,8 +52,6 @@ class _EnterPinCallOutWidgetState extends State<EnterPinCallOutWidget> {
     _model = createModel(context, () => EnterPinCallOutModel());
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

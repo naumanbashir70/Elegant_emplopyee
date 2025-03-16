@@ -53,8 +53,6 @@ class _MyShiftsWidgetState extends State<MyShiftsWidget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

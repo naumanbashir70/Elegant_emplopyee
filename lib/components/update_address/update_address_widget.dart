@@ -50,8 +50,6 @@ class _UpdateAddressWidgetState extends State<UpdateAddressWidget> {
 
     _model.cityTextController3 ??= TextEditingController();
     _model.cityFocusNode3 ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

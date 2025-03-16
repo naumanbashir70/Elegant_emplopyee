@@ -51,8 +51,6 @@ class _NearMeWidgetState extends State<NearMeWidget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

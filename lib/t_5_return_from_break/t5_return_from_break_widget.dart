@@ -69,8 +69,6 @@ class _T5ReturnFromBreakWidgetState extends State<T5ReturnFromBreakWidget> {
         safeSetState(() {});
       }
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

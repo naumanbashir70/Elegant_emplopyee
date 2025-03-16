@@ -45,8 +45,6 @@ class _UpdatePINpopWidgetState extends State<UpdatePINpopWidget> {
     _model.newPinFocusNode ??= FocusNode();
 
     _model.reNewPinFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

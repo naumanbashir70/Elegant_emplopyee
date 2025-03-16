@@ -36,8 +36,6 @@ class _LoginWidgetState extends State<LoginWidget> {
     _model.passwordFieldFocusNode ??= FocusNode();
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -36,8 +36,6 @@ class _ShiftCancelledWidgetState extends State<ShiftCancelledWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ShiftCancelledModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -407,7 +405,7 @@ class _ShiftCancelledWidgetState extends State<ShiftCancelledWidget> {
                         ),
                       ),
                     ),
-                    Expanded(
+                    Flexible(
                       child: Align(
                         alignment: AlignmentDirectional(0.0, 0.0),
                         child: Padding(

@@ -26,8 +26,6 @@ class _InvalidClockINCodeWidgetState extends State<InvalidClockINCodeWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => InvalidClockINCodeModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -40,8 +40,6 @@ class _JobDetailsWidgetState extends State<JobDetailsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => JobDetailsModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

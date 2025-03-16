@@ -44,8 +44,6 @@ class _TPRFBSucessBreakWidgetState extends State<TPRFBSucessBreakWidget> {
         }.withoutNulls,
       );
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

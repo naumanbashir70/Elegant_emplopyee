@@ -54,8 +54,6 @@ class _T1SelectShiftWidgetState extends State<T1SelectShiftWidget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

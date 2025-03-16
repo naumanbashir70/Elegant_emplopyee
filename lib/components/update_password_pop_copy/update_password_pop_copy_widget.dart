@@ -49,8 +49,6 @@ class _UpdatePasswordPopCopyWidgetState
 
     _model.newpasswordconfTextController ??= TextEditingController();
     _model.newpasswordconfFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

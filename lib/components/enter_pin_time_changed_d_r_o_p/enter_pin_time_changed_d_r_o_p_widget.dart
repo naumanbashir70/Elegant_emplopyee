@@ -54,8 +54,6 @@ class _EnterPinTimeChangedDROPWidgetState
     _model = createModel(context, () => EnterPinTimeChangedDROPModel());
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

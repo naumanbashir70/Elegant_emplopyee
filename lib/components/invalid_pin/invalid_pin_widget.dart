@@ -25,8 +25,6 @@ class _InvalidPinWidgetState extends State<InvalidPinWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => InvalidPinModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

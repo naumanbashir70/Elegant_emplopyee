@@ -37,8 +37,6 @@ class _ShiftDetailsTimeChangedWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => ShiftDetailsTimeChangedModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

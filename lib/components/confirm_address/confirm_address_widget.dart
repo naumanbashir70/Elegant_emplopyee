@@ -32,8 +32,6 @@ class _ConfirmAddressWidgetState extends State<ConfirmAddressWidget> {
     _model.textFieldFocusNode ??= FocusNode();
 
     _model.pinCodeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
