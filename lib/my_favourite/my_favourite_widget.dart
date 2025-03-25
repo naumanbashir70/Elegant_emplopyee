@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -146,7 +147,7 @@ class _MyFavouriteWidgetState extends State<MyFavouriteWidget> {
                           MyPrefJobCondWidget.routeName,
                           queryParameters: {
                             'apitoken': serializeParam(
-                              widget.apitoken,
+                              currentAuthenticationToken,
                               ParamType.String,
                             ),
                           }.withoutNulls,
@@ -205,7 +206,7 @@ class _MyFavouriteWidgetState extends State<MyFavouriteWidget> {
                           MyPrefLocWidget.routeName,
                           queryParameters: {
                             'apitoken': serializeParam(
-                              widget.apitoken,
+                              currentAuthenticationToken,
                               ParamType.String,
                             ),
                           }.withoutNulls,
@@ -264,7 +265,7 @@ class _MyFavouriteWidgetState extends State<MyFavouriteWidget> {
                           MyPrefDaysWidget.routeName,
                           queryParameters: {
                             'apitoken': serializeParam(
-                              widget.apitoken,
+                              currentAuthenticationToken,
                               ParamType.String,
                             ),
                           }.withoutNulls,
@@ -328,7 +329,7 @@ class _MyFavouriteWidgetState extends State<MyFavouriteWidget> {
                                 MyWorkHistoryWidget.routeName,
                                 queryParameters: {
                                   'apitoken': serializeParam(
-                                    widget.apitoken,
+                                    currentAuthenticationToken,
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,
@@ -381,7 +382,7 @@ class _MyFavouriteWidgetState extends State<MyFavouriteWidget> {
                                   OtherJobWidget.routeName,
                                   queryParameters: {
                                     'apitoken': serializeParam(
-                                      widget.apitoken,
+                                      currentAuthenticationToken,
                                       ParamType.String,
                                     ),
                                   }.withoutNulls,

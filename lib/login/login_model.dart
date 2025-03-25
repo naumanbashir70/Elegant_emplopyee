@@ -20,7 +20,7 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
   TextEditingController? pinCodeController;
   FocusNode? pinCodeFocusNode;
   String? Function(BuildContext, String?)? pinCodeControllerValidator;
-  // Stores action output result for [Backend Call - API (test)] action in Button widget.
+  // Stores action output result for [Backend Call - API (Login)] action in Button widget.
   ApiCallResponse? loginResponse;
 
   @override

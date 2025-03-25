@@ -35,6 +35,17 @@ class FFAppState extends ChangeNotifier {
       _pass = await secureStorage.getString('ff_pass') ?? _pass;
     });
     await _safeInitAsync(() async {
+      _primarynum =
+          await secureStorage.getString('ff_primarynum') ?? _primarynum;
+    });
+    await _safeInitAsync(() async {
+      _alternatenum =
+          await secureStorage.getString('ff_alternatenum') ?? _alternatenum;
+    });
+    await _safeInitAsync(() async {
+      _tokenapi = await secureStorage.getString('ff_tokenapi') ?? _tokenapi;
+    });
+    await _safeInitAsync(() async {
       _ClockInTime =
           await secureStorage.getString('ff_ClockInTime') ?? _ClockInTime;
     });
@@ -53,6 +64,10 @@ class FFAppState extends ChangeNotifier {
     await _safeInitAsync(() async {
       _clientname =
           await secureStorage.getString('ff_clientname') ?? _clientname;
+    });
+    await _safeInitAsync(() async {
+      _CurrentPosCode =
+          await secureStorage.getString('ff_CurrentPosCode') ?? _CurrentPosCode;
     });
   }
 
@@ -150,21 +165,36 @@ class FFAppState extends ChangeNotifier {
   String get primarynum => _primarynum;
   set primarynum(String value) {
     _primarynum = value;
+    secureStorage.setString('ff_primarynum', value);
+  }
+
+  void deletePrimarynum() {
+    secureStorage.delete(key: 'ff_primarynum');
   }
 
   String _alternatenum = '';
   String get alternatenum => _alternatenum;
   set alternatenum(String value) {
     _alternatenum = value;
+    secureStorage.setString('ff_alternatenum', value);
+  }
+
+  void deleteAlternatenum() {
+    secureStorage.delete(key: 'ff_alternatenum');
   }
 
   String _tokenapi = '';
   String get tokenapi => _tokenapi;
   set tokenapi(String value) {
     _tokenapi = value;
+    secureStorage.setString('ff_tokenapi', value);
   }
 
-  String _ClockInTime = '';
+  void deleteTokenapi() {
+    secureStorage.delete(key: 'ff_tokenapi');
+  }
+
+  String _ClockInTime = 'currenttime';
   String get ClockInTime => _ClockInTime;
   set ClockInTime(String value) {
     _ClockInTime = value;
@@ -229,6 +259,11 @@ class FFAppState extends ChangeNotifier {
   String get CurrentPosCode => _CurrentPosCode;
   set CurrentPosCode(String value) {
     _CurrentPosCode = value;
+    secureStorage.setString('ff_CurrentPosCode', value);
+  }
+
+  void deleteCurrentPosCode() {
+    secureStorage.delete(key: 'ff_CurrentPosCode');
   }
 }
 

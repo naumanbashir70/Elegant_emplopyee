@@ -1,5 +1,6 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/components/elogin/elogin_widget.dart';
+import '/components/elogin_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -370,13 +371,20 @@ class _LoginWidgetState extends State<LoginWidget> {
                         EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        _model.loginResponse = await TestCall.call(
+                        _model.loginResponse = await LoginCall.call(
                           email: _model.emailFieldTextController.text,
                           password: _model.passwordFieldTextController.text,
                           pin: _model.pinCodeController!.text,
                         );
 
                         if ((_model.loginResponse?.succeeded ?? true)) {
+                          GoRouter.of(context).prepareAuthEvent();
+                          await authManager.signIn(
+                            authenticationToken: getJsonField(
+                              (_model.loginResponse?.jsonBody ?? ''),
+                              r'''$.api_token''',
+                            ).toString(),
+                          );
                           FFAppState().email2 =
                               _model.emailFieldTextController.text;
                           FFAppState().pin = _model.pinCodeController!.text;
@@ -390,13 +398,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                             (_model.loginResponse?.jsonBody ?? ''),
                             r'''$.secondary_phone''',
                           ).toString();
-                          FFAppState().tokenapi = getJsonField(
-                            (_model.loginResponse?.jsonBody ?? ''),
-                            r'''$.api_token''',
-                          ).toString();
+                          FFAppState().tokenapi = currentAuthenticationToken!;
 
-                          context.pushNamed(
+                          context.pushNamedAuth(
                             HomeWidget.routeName,
+                            context.mounted,
                             queryParameters: {
                               'apitoken': serializeParam(
                                 getJsonField(

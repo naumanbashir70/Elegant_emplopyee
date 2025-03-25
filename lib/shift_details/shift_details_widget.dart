@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/enter_pin_call_out/enter_pin_call_out_widget.dart';
 import '/components/enter_pin_reconfirm/enter_pin_reconfirm_widget.dart';
@@ -55,7 +56,7 @@ class _ShiftDetailsWidgetState extends State<ShiftDetailsWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder<ApiCallResponse>(
       future: JobDetailsCall.call(
-        apiToken: widget.apitoken,
+        apiToken: currentAuthenticationToken,
         key: widget.shiftkey,
       ),
       builder: (context, snapshot) {
@@ -1246,7 +1247,7 @@ class _ShiftDetailsWidgetState extends State<ShiftDetailsWidget> {
                                                 MyShiftsWidget.routeName,
                                                 queryParameters: {
                                                   'apitoken': serializeParam(
-                                                    widget.apitoken,
+                                                    currentAuthenticationToken,
                                                     ParamType.String,
                                                   ),
                                                 }.withoutNulls,
@@ -1364,7 +1365,7 @@ class _ShiftDetailsWidgetState extends State<ShiftDetailsWidget> {
                                                         child:
                                                             EnterPinSimpleShiftWidget(
                                                           apitoken:
-                                                              widget.apitoken!,
+                                                              currentAuthenticationToken!,
                                                           keydrop:
                                                               widget.shiftkey!,
                                                           intime: getJsonField(
@@ -1474,7 +1475,7 @@ class _ShiftDetailsWidgetState extends State<ShiftDetailsWidget> {
                                                         child:
                                                             EnterPinTimeChangedDROPWidget(
                                                           apitoken:
-                                                              widget.apitoken!,
+                                                              currentAuthenticationToken!,
                                                           keydrop:
                                                               widget.shiftkey!,
                                                           intime: getJsonField(
@@ -1561,8 +1562,8 @@ class _ShiftDetailsWidgetState extends State<ShiftDetailsWidget> {
                                                                       context)),
                                                           child:
                                                               EnterPinTimeChangedACCEPTWidget(
-                                                            apitoken: widget
-                                                                .apitoken!,
+                                                            apitoken:
+                                                                currentAuthenticationToken!,
                                                             keytimec: widget
                                                                 .shiftkey!,
                                                             intime:
@@ -1690,8 +1691,8 @@ class _ShiftDetailsWidgetState extends State<ShiftDetailsWidget> {
                                                                       context)),
                                                           child:
                                                               EnterPinCallOutWidget(
-                                                            apkitoken: widget
-                                                                .apitoken!,
+                                                            apkitoken:
+                                                                currentAuthenticationToken!,
                                                             intime:
                                                                 getJsonField(
                                                               shiftDetailsJobDetailsResponse
@@ -1782,8 +1783,8 @@ class _ShiftDetailsWidgetState extends State<ShiftDetailsWidget> {
                                                                       context)),
                                                           child:
                                                               EnterPinReconfirmWidget(
-                                                            apitoken: widget
-                                                                .apitoken!,
+                                                            apitoken:
+                                                                currentAuthenticationToken!,
                                                             keyconfirm: widget
                                                                 .shiftkey!,
                                                             intime:

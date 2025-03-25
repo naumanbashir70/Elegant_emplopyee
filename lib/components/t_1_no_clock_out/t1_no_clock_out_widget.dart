@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/invalid_pin/invalid_pin_widget.dart';
 import '/components/job_dropped/job_dropped_widget.dart';
@@ -356,7 +357,7 @@ class _T1NoClockOutWidgetState extends State<T1NoClockOutWidget> {
                               MyShiftsWidget.routeName,
                               queryParameters: {
                                 'apitoken': serializeParam(
-                                  widget.apitoken,
+                                  currentAuthenticationToken,
                                   ParamType.String,
                                 ),
                               }.withoutNulls,
@@ -379,7 +380,7 @@ class _T1NoClockOutWidgetState extends State<T1NoClockOutWidget> {
 
                           _model.apiResult6stCopy =
                               await UpdateEmpStatusCall.call(
-                            apiToken: widget.apitoken,
+                            apiToken: currentAuthenticationToken,
                             key: widget.keydrop,
                             inTime: widget.intime,
                             outTime: widget.outime,

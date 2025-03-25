@@ -14,7 +14,7 @@ class T2ClockInModel extends FlutterFlowModel<T2ClockInWidget> {
   // Stores action output result for [Backend Call - API (ClockInStatus)] action in Circle widget.
   ApiCallResponse? statusCheck;
   // Stores action output result for [Backend Call - API (ClockIn)] action in Circle widget.
-  ApiCallResponse? clockIn;
+  ApiCallResponse? clockein;
 
   @override
   void initState(BuildContext context) {

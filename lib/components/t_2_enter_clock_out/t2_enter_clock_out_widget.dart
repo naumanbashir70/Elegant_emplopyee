@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/invalid_clock_o_u_t_code/invalid_clock_o_u_t_code_widget.dart';
 import '/components/t_p_clock_out_success/t_p_clock_out_success_widget.dart';
@@ -7,7 +8,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 import 't2_enter_clock_out_model.dart';
 export 't2_enter_clock_out_model.dart';
 
@@ -49,8 +49,6 @@ class _T2EnterClockOutWidgetState extends State<T2EnterClockOutWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: Container(
@@ -120,13 +118,22 @@ class _T2EnterClockOutWidgetState extends State<T2EnterClockOutWidget> {
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: SvgPicture.asset(
-                            'assets/images/Close.svg',
-                            width: 25.0,
-                            height: 25.0,
-                            fit: BoxFit.fitWidth,
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            Navigator.pop(context);
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: SvgPicture.asset(
+                              'assets/images/Close.svg',
+                              width: 25.0,
+                              height: 25.0,
+                              fit: BoxFit.fitWidth,
+                            ),
                           ),
                         ),
                       ),
@@ -239,7 +246,7 @@ class _T2EnterClockOutWidgetState extends State<T2EnterClockOutWidget> {
                     highlightColor: Colors.transparent,
                     onTap: () async {
                       _model.clockOUT = await ClockOutCall.call(
-                        apiToken: FFAppState().tokenapi,
+                        apiToken: currentAuthenticationToken,
                         code: _model.pinCodeController!.text,
                       );
 

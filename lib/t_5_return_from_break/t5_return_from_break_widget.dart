@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/t_p_r_f_b_sucess_break/t_p_r_f_b_sucess_break_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -330,7 +331,7 @@ class _T5ReturnFromBreakWidgetState extends State<T5ReturnFromBreakWidget> {
                               highlightColor: Colors.transparent,
                               onTap: () async {
                                 await ClockInStatusCall.call(
-                                  apiToken: widget.apitoken,
+                                  apiToken: currentAuthenticationToken,
                                 );
 
                                 if (getJsonField(
@@ -342,7 +343,7 @@ class _T5ReturnFromBreakWidgetState extends State<T5ReturnFromBreakWidget> {
                                       r'''$.allowed_for_break_in_check''',
                                     )) {
                                   _model.apiResult92s = await BreakInCall.call(
-                                    apiToken: FFAppState().tokenapi,
+                                    apiToken: currentAuthenticationToken,
                                   );
 
                                   if ((_model.apiResult92s?.succeeded ??

@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/t_p_clock_out_success/t_p_clock_out_success_widget.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
@@ -8,7 +9,6 @@ import '/flutter_flow/form_field_controller.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 import 't1_no_clock_out_time_copy_model.dart';
 export 't1_no_clock_out_time_copy_model.dart';
 
@@ -50,8 +50,6 @@ class _T1NoClockOutTimeCopyWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: Container(
@@ -398,7 +396,7 @@ class _T1NoClockOutTimeCopyWidgetState
                     child: FFButtonWidget(
                       onPressed: () async {
                         _model.noCode = await ClockOutWithoutCodeCall.call(
-                          apiToken: FFAppState().tokenapi,
+                          apiToken: currentAuthenticationToken,
                           pin: _model.pinCodeController!.text,
                           breakDuration: _model.choiceChipsValue,
                           note: _model.textController.text,

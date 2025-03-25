@@ -1,42 +1,50 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/components/invalid_clock_i_n_code/invalid_clock_i_n_code_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
 import '/index.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:provider/provider.dart';
-import 't3_job_clock_in_copy_model.dart';
-export 't3_job_clock_in_copy_model.dart';
+import 't2_clock_in_copy_model.dart';
+export 't2_clock_in_copy_model.dart';
 
-class T3JobClockInCopyWidget extends StatefulWidget {
-  const T3JobClockInCopyWidget({
+class T2ClockInCopyWidget extends StatefulWidget {
+  const T2ClockInCopyWidget({
     super.key,
     required this.apitoken,
+    required this.title,
+    required this.intime,
+    required this.jobkey,
+    required this.poscode,
+    required this.clientname,
   });
 
   final String? apitoken;
+  final String? title;
+  final String? intime;
+  final String? jobkey;
+  final String? poscode;
+  final String? clientname;
 
-  static String routeName = 'T_3_Job_ClockInCopy';
-  static String routePath = '/t3JobClockInCopy';
+  static String routeName = 'T_2_ClockInCopy';
+  static String routePath = '/t2ClockInCopy';
 
   @override
-  State<T3JobClockInCopyWidget> createState() => _T3JobClockInCopyWidgetState();
+  State<T2ClockInCopyWidget> createState() => _T2ClockInCopyWidgetState();
 }
 
-class _T3JobClockInCopyWidgetState extends State<T3JobClockInCopyWidget> {
-  late T3JobClockInCopyModel _model;
+class _T2ClockInCopyWidgetState extends State<T2ClockInCopyWidget> {
+  late T2ClockInCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => T3JobClockInCopyModel());
+    _model = createModel(context, () => T2ClockInCopyModel());
 
     _model.pinCodeFocusNode ??= FocusNode();
   }
@@ -50,8 +58,6 @@ class _T3JobClockInCopyWidgetState extends State<T3JobClockInCopyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -72,7 +78,7 @@ class _T3JobClockInCopyWidgetState extends State<T3JobClockInCopyWidget> {
             ),
             onPressed: () async {
               context.pushNamed(
-                AllJobsWidget.routeName,
+                HomeWidget.routeName,
                 queryParameters: {
                   'apitoken': serializeParam(
                     widget.apitoken,
@@ -133,11 +139,195 @@ class _T3JobClockInCopyWidgetState extends State<T3JobClockInCopyWidget> {
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Align(
+                    alignment: AlignmentDirectional(0.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Align(
+                            alignment: AlignmentDirectional(0.0, -1.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 15.0, 0.0, 0.0),
+                              child: Container(
+                                width: 320.0,
+                                height: 51.0,
+                                decoration: BoxDecoration(
+                                  color: Color(0x00FFFFFF),
+                                  border: Border.all(
+                                    color: Color(0x00FFFFFF),
+                                  ),
+                                ),
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Align(
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Text(
+                                        valueOrDefault<String>(
+                                          widget.clientname,
+                                          'ClientName',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 25.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(0.0, 0.0),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(15.0, 30.0, 15.0, 0.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 110.0,
+                        decoration: BoxDecoration(
+                          color: Color(0x45000000),
+                          borderRadius: BorderRadius.circular(10.0),
+                          border: Border.all(
+                            color: Color(0x00FFFFFF),
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 1.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 10.0, 12.0, 10.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Report Time',
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                    Text(
+                                      valueOrDefault<String>(
+                                        widget.intime,
+                                        'intime',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 5.0, 10.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: 1.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(0.0, -1.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 10.0, 12.0, 10.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Job',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 0.0),
+                                      child: Text(
+                                        valueOrDefault<String>(
+                                          widget.title,
+                                          'Server',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(18.0, 25.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(18.0, 30.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -219,54 +409,12 @@ class _T3JobClockInCopyWidgetState extends State<T3JobClockInCopyWidget> {
                             inactiveColor: Color(0xFF707070),
                             selectedColor:
                                 FlutterFlowTheme.of(context).secondaryText,
-                            activeFillColor: Color(0xAA000000),
-                            inactiveFillColor: Color(0x69000000),
-                            selectedFillColor: Color(0xC8000000),
+                            activeFillColor: Color(0x45000000),
+                            inactiveFillColor: Color(0x45000000),
+                            selectedFillColor: Color(0x6B000000),
                           ),
                           controller: _model.pinCodeController,
                           onChanged: (_) {},
-                          onCompleted: (_) async {
-                            _model.clientDetialbyCodeRes =
-                                await ClientDetailByCodeCall.call(
-                              apiToken: widget.apitoken,
-                              code: _model.pinCodeController!.text,
-                            );
-
-                            if ((_model.clientDetialbyCodeRes?.succeeded ??
-                                true)) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Success',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                    ),
-                                  ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).secondary,
-                                ),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Error',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                    ),
-                                  ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).secondary,
-                                ),
-                              );
-                            }
-
-                            safeSetState(() {});
-                          },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: _model.pinCodeControllerValidator
                               .asValidator(context),
@@ -274,302 +422,62 @@ class _T3JobClockInCopyWidgetState extends State<T3JobClockInCopyWidget> {
                       ),
                     ),
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
+                  Align(
+                    alignment: AlignmentDirectional(0.0, 0.0),
+                    child: Builder(
+                      builder: (context) => Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 10.0, 0.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'Confirm Company',
-                              style: FlutterFlowTheme.of(context)
-                                  .titleMedium
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 6.0, 15.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Flexible(
-                              child: Container(
-                                width: double.infinity,
-                                height: 50.0,
-                                decoration: BoxDecoration(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Align(
-                                  alignment: AlignmentDirectional(-1.0, 0.0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      valueOrDefault<String>(
-                                        ClientDetailByCodeCall
-                                            .clientNameForScreen(
-                                          (_model.clientDetialbyCodeRes
-                                                  ?.jsonBody ??
-                                              ''),
-                                        ),
-                                        'Company Name',
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Poppins',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 16.0, 15.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
-                              },
-                              text: 'NO',
-                              options: FFButtonOptions(
-                                width: 80.0,
-                                height: 35.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: Color(0xA6000000),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                    ),
-                                elevation: 0.0,
-                                borderSide: BorderSide(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                            FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
-                              },
-                              text: 'YES',
-                              options: FFButtonOptions(
-                                width: 80.0,
-                                height: 35.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: Color(0xFF77B345),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                    ),
-                                elevation: 0.0,
-                                borderSide: BorderSide(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                          ].divide(SizedBox(width: 15.0)),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              15.0, 0.0, 0.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Select Job',
-                                style: FlutterFlowTheme.of(context)
-                                    .titleMedium
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 16.0,
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              15.0, 6.0, 15.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: FutureBuilder<ApiCallResponse>(
-                                  future: ClientDetailByCodeCall.call(
-                                    apiToken: widget.apitoken,
-                                    code: _model.pinCodeController!.text,
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: SpinKitCubeGrid(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 50.0,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    final dropDownClientDetailByCodeResponse =
-                                        snapshot.data!;
-
-                                    return FlutterFlowDropDown<String>(
-                                      controller:
-                                          _model.dropDownValueController ??=
-                                              FormFieldController<String>(null),
-                                      options: ClientDetailByCodeCall
-                                          .codeForDropDown(
-                                        dropDownClientDetailByCodeResponse
-                                            .jsonBody,
-                                      )!,
-                                      onChanged: (val) => safeSetState(
-                                          () => _model.dropDownValue = val),
-                                      width: 200.0,
-                                      height: 45.0,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Poppins',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                            letterSpacing: 0.0,
-                                            lineHeight: 1.5,
-                                          ),
-                                      hintText: 'Select Job',
-                                      icon: Icon(
-                                        Icons.keyboard_arrow_down_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        size: 30.0,
-                                      ),
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      elevation: 2.0,
-                                      borderColor: Colors.transparent,
-                                      borderWidth: 0.0,
-                                      borderRadius: 10.0,
-                                      margin: EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 0.0, 12.0, 0.0),
-                                      hidesUnderline: true,
-                                      isOverButton: false,
-                                      isSearchable: false,
-                                      isMultiSelect: false,
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  if ((_model.clientDetialbyCodeRes?.succeeded ?? true))
-                    Align(
-                      alignment: AlignmentDirectional(0.0, -1.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 50.0, 10.0, 0.0),
+                            10.0, 0.0, 10.0, 0.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            _model.clockInStatus = await ClockInStatusCall.call(
-                              apiToken: widget.apitoken,
+                            _model.statusCheck = await ClockInStatusCall.call(
+                              apiToken: currentAuthenticationToken,
                             );
 
-                            if ((_model.clockInStatus?.succeeded ?? true)) {
+                            if ((_model.statusCheck?.succeeded ?? true)) {
                               if (getJsonField(
-                                    (_model.clockInStatus?.jsonBody ?? ''),
+                                    (_model.statusCheck?.jsonBody ?? ''),
                                     r'''$.allowed_for_clock_in''',
                                   ) ==
                                   getJsonField(
-                                    (_model.clockInStatus?.jsonBody ?? ''),
+                                    (_model.statusCheck?.jsonBody ?? ''),
                                     r'''$.allowed_for_clock_in_status''',
                                   )) {
-                                _model.clockInShift = await ClockInCall.call(
-                                  apiToken: FFAppState().tokenapi,
-                                  code: _model.pinCodeController!.text,
-                                  positionCode: _model.dropDownValue,
-                                );
+                                if ((_model.clockIn?.succeeded ?? true)) {
+                                  FFAppState().CurrentTitle = widget.title!;
+                                  FFAppState().clientname = widget.clientname!;
+                                  FFAppState().CurrentPosCode =
+                                      widget.poscode!;
 
-                                if ((_model.clockInShift?.succeeded ?? true)) {
-                                  FFAppState().ClockInTime =
-                                      dateTimeFormat("jm", getCurrentTimestamp);
-                                  FFAppState().CurrentTitle =
-                                      _model.dropDownValue!;
-                                  safeSetState(() {});
+                                  context.pushNamed(
+                                      T4JobClockedInWidget.routeName);
                                 } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Error',
-                                        style: TextStyle(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
-                                      ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                    ),
+                                  await showDialog(
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        insetPadding: EdgeInsets.zero,
+                                        backgroundColor: Colors.transparent,
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                        child: InvalidClockINCodeWidget(),
+                                      );
+                                    },
                                   );
                                 }
+
+                                _model.clockIn = await ClockInCall.call(
+                                  apiToken: currentAuthenticationToken,
+                                  code: _model.pinCodeController!.text,
+                                  positionCode: widget.poscode,
+                                );
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -582,7 +490,7 @@ class _T3JobClockInCopyWidgetState extends State<T3JobClockInCopyWidget> {
                                     ),
                                     duration: Duration(milliseconds: 4000),
                                     backgroundColor:
-                                        FlutterFlowTheme.of(context).error,
+                                        FlutterFlowTheme.of(context).secondary,
                                   ),
                                 );
                               }
@@ -598,7 +506,7 @@ class _T3JobClockInCopyWidgetState extends State<T3JobClockInCopyWidget> {
                                   ),
                                   duration: Duration(milliseconds: 4000),
                                   backgroundColor:
-                                      FlutterFlowTheme.of(context).error,
+                                      FlutterFlowTheme.of(context).secondary,
                                 ),
                               );
                             }
@@ -664,7 +572,8 @@ class _T3JobClockInCopyWidgetState extends State<T3JobClockInCopyWidget> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                '6:05 am',
+                                                dateTimeFormat(
+                                                    "jm", getCurrentTimestamp),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -714,14 +623,16 @@ class _T3JobClockInCopyWidgetState extends State<T3JobClockInCopyWidget> {
                         ),
                       ),
                     ),
+                  ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 1.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 10.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Align(
                             alignment: AlignmentDirectional(0.0, 0.0),

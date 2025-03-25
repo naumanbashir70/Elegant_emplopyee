@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/components/email_confirm_pop_info/email_confirm_pop_info_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -391,7 +392,8 @@ class _MyProfileUpdateEmailWidgetState
                                               email: _model
                                                   .emailupdateTextController
                                                   .text,
-                                              apitoken: widget.apitoken!,
+                                              apitoken:
+                                                  currentAuthenticationToken!,
                                             ),
                                           );
                                         },

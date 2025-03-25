@@ -9,14 +9,14 @@ export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
-class TestCall {
+class LoginCall {
   static Future<ApiCallResponse> call({
     String? email = '',
     String? password = '',
     String? pin = '',
   }) async {
     return ApiManager.instance.makeApiCall(
-      callName: 'test',
+      callName: 'Login',
       apiUrl: 'http://18.141.200.126/employee-app-api/login',
       callType: ApiCallType.GET,
       headers: {
@@ -88,7 +88,9 @@ class DashboardDataCall {
       callName: 'DashboardData',
       apiUrl: 'http://18.141.200.126/employee-app-api/dashboard-data',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${apiToken}',
+      },
       params: {
         'api_token': apiToken,
       },
@@ -935,6 +937,12 @@ class ClockInCall {
       alwaysAllowBody: false,
     );
   }
+
+  static String? clockedInTime(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.clocked_in_at''',
+      ));
 }
 
 class BreakOutCall {

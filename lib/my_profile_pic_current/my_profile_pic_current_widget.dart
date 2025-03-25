@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/perror/perror_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -49,7 +50,7 @@ class _MyProfilePicCurrentWidgetState extends State<MyProfilePicCurrentWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder<ApiCallResponse>(
       future: DashboardDataCall.call(
-        apiToken: widget.apitoken,
+        apiToken: currentAuthenticationToken,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -429,7 +430,8 @@ class _MyProfilePicCurrentWidgetState extends State<MyProfilePicCurrentWidget> {
                                           onPressed: () async {
                                             _model.apiResulttfu =
                                                 await UplaodProfilePicCall.call(
-                                              apiToken: widget.apitoken,
+                                              apiToken:
+                                                  currentAuthenticationToken,
                                               image: _model.uploadedLocalFile,
                                             );
 

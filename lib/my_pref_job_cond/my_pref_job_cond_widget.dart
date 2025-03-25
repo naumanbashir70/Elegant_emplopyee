@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -178,7 +179,7 @@ class _MyPrefJobCondWidgetState extends State<MyPrefJobCondWidget>
                 padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 5.0),
                 child: FutureBuilder<ApiCallResponse>(
                   future: PefJobCall.call(
-                    apiToken: widget.apitoken,
+                    apiToken: currentAuthenticationToken,
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
@@ -282,7 +283,8 @@ class _MyPrefJobCondWidgetState extends State<MyPrefJobCondWidget>
                                               onTap: () async {
                                                 _model.apiResultPrefCopy =
                                                     await UpPefJobCall.call(
-                                                  apiToken: widget.apitoken,
+                                                  apiToken:
+                                                      currentAuthenticationToken,
                                                   jobId: getJsonField(
                                                     varJobsItem,
                                                     r'''$.id''',
@@ -335,7 +337,8 @@ class _MyPrefJobCondWidgetState extends State<MyPrefJobCondWidget>
                                               onTap: () async {
                                                 _model.apiResulte7lCopy =
                                                     await UpPefJobCall.call(
-                                                  apiToken: widget.apitoken,
+                                                  apiToken:
+                                                      currentAuthenticationToken,
                                                   jobId: getJsonField(
                                                     varJobsItem,
                                                     r'''$.id''',

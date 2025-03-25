@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/t_2_enter_clock_out/t2_enter_clock_out_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -356,7 +357,7 @@ class _T6ClockOutWidgetState extends State<T6ClockOutWidget> {
                               onTap: () async {
                                 _model.clockstatus =
                                     await ClockInStatusCall.call(
-                                  apiToken: widget.apitoken,
+                                  apiToken: currentAuthenticationToken,
                                 );
 
                                 if (getJsonField(
@@ -379,7 +380,7 @@ class _T6ClockOutWidgetState extends State<T6ClockOutWidget> {
                                                 .resolve(
                                                     Directionality.of(context)),
                                         child: T2EnterClockOutWidget(
-                                          apitoken: '',
+                                          apitoken: currentAuthenticationToken!,
                                         ),
                                       );
                                     },

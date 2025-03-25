@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/job_accept_pop/job_accept_pop_widget.dart';
 import '/components/job_reject/job_reject_widget.dart';
@@ -53,7 +54,7 @@ class _JobDetailsWidgetState extends State<JobDetailsWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder<ApiCallResponse>(
       future: JobDetailsCall.call(
-        apiToken: widget.apitoken,
+        apiToken: currentAuthenticationToken,
         key: widget.jobkey,
       ),
       builder: (context, snapshot) {
@@ -908,7 +909,7 @@ class _JobDetailsWidgetState extends State<JobDetailsWidget> {
                                                                     context)),
                                                     child: JobRejectWidget(
                                                       apitoken:
-                                                          widget.apitoken!,
+                                                          currentAuthenticationToken!,
                                                       jobkey: widget.jobkey!,
                                                       intime: getJsonField(
                                                         jobDetailsJobDetailsResponse
@@ -972,7 +973,8 @@ class _JobDetailsWidgetState extends State<JobDetailsWidget> {
                                               _model.apiResult6st =
                                                   await UpdateEmpStatusCall
                                                       .call(
-                                                apiToken: widget.apitoken,
+                                                apiToken:
+                                                    currentAuthenticationToken,
                                                 key: widget.jobkey,
                                                 inTime: getJsonField(
                                                   jobDetailsJobDetailsResponse

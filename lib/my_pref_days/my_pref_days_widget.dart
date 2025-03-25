@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -241,7 +242,8 @@ class _MyPrefDaysWidgetState extends State<MyPrefDaysWidget> {
                                               onTap: () async {
                                                 _model.apiResult1b4 =
                                                     await UpPrefDayCall.call(
-                                                  apiToken: widget.apitoken,
+                                                  apiToken:
+                                                      currentAuthenticationToken,
                                                   day: getJsonField(
                                                     varDaysItem,
                                                     r'''$.day''',
@@ -310,7 +312,8 @@ class _MyPrefDaysWidgetState extends State<MyPrefDaysWidget> {
                                               onTap: () async {
                                                 _model.upd =
                                                     await UpPrefDayCall.call(
-                                                  apiToken: widget.apitoken,
+                                                  apiToken:
+                                                      currentAuthenticationToken,
                                                   day: getJsonField(
                                                     varDaysItem,
                                                     r'''$.day''',

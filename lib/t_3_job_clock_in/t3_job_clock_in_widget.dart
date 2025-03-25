@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/invalid_clock_i_n_code/invalid_clock_i_n_code_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -10,7 +11,6 @@ import '/index.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:provider/provider.dart';
 import 't3_job_clock_in_model.dart';
 export 't3_job_clock_in_model.dart';
 
@@ -51,8 +51,6 @@ class _T3JobClockInWidgetState extends State<T3JobClockInWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -229,7 +227,7 @@ class _T3JobClockInWidgetState extends State<T3JobClockInWidget> {
                           onCompleted: (_) async {
                             _model.clientDetialbyCodeRes =
                                 await ClientDetailByCodeCall.call(
-                              apiToken: widget.apitoken,
+                              apiToken: currentAuthenticationToken,
                               code: _model.pinCodeController!.text,
                             );
 
@@ -446,7 +444,7 @@ class _T3JobClockInWidgetState extends State<T3JobClockInWidget> {
                                 Expanded(
                                   child: FutureBuilder<ApiCallResponse>(
                                     future: ClientDetailByCodeCall.call(
-                                      apiToken: widget.apitoken,
+                                      apiToken: currentAuthenticationToken,
                                       code: _model.pinCodeController!.text,
                                     ),
                                     builder: (context, snapshot) {
@@ -541,7 +539,7 @@ class _T3JobClockInWidgetState extends State<T3JobClockInWidget> {
                       child: Builder(
                         builder: (context) => Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 0.0),
+                              10.0, 20.0, 10.0, 20.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
@@ -550,7 +548,7 @@ class _T3JobClockInWidgetState extends State<T3JobClockInWidget> {
                             onTap: () async {
                               _model.clockInStatus =
                                   await ClockInStatusCall.call(
-                                apiToken: FFAppState().tokenapi,
+                                apiToken: currentAuthenticationToken,
                               );
 
                               if ((_model.clockInStatus?.succeeded ?? true)) {
@@ -563,7 +561,7 @@ class _T3JobClockInWidgetState extends State<T3JobClockInWidget> {
                                       r'''$.allowed_for_clock_in_status''',
                                     )) {
                                   _model.clockInShift = await ClockInCall.call(
-                                    apiToken: FFAppState().tokenapi,
+                                    apiToken: currentAuthenticationToken,
                                     code: _model.pinCodeController!.text,
                                     positionCode: _model.dropDownValue,
                                   );

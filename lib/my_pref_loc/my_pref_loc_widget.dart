@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -137,7 +138,7 @@ class _MyPrefLocWidgetState extends State<MyPrefLocWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 5.0),
                 child: FutureBuilder<ApiCallResponse>(
                   future: PreLocCall.call(
-                    apiToken: widget.apitoken,
+                    apiToken: currentAuthenticationToken,
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
@@ -244,7 +245,8 @@ class _MyPrefLocWidgetState extends State<MyPrefLocWidget> {
                                               onTap: () async {
                                                 _model.apiResultPrefCopy =
                                                     await UpPrefLocCall.call(
-                                                  apiToken: widget.apitoken,
+                                                  apiToken:
+                                                      currentAuthenticationToken,
                                                   clientId: getJsonField(
                                                     varClientsItem,
                                                     r'''$.id''',
@@ -293,7 +295,8 @@ class _MyPrefLocWidgetState extends State<MyPrefLocWidget> {
                                               onTap: () async {
                                                 _model.apiResulte7lCopy =
                                                     await UpPrefLocCall.call(
-                                                  apiToken: widget.apitoken,
+                                                  apiToken:
+                                                      currentAuthenticationToken,
                                                   clientId: getJsonField(
                                                     varClientsItem,
                                                     r'''$.id''',

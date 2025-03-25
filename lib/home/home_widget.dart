@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,7 +9,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 import 'home_model.dart';
 export 'home_model.dart';
 
@@ -42,7 +42,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.statusCheck = await ClockInStatusCall.call(
-        apiToken: FFAppState().tokenapi,
+        apiToken: currentAuthenticationToken,
       );
     });
 
@@ -107,11 +107,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<ApiCallResponse>(
       future: DashboardDataCall.call(
-        apiToken: FFAppState().tokenapi,
+        apiToken: currentAuthenticationToken,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -152,6 +150,39 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              GoRouter.of(context).prepareAuthEvent();
+                              await authManager.signOut();
+                              GoRouter.of(context).clearRedirectLocation();
+
+                              context.goNamedAuth(
+                                  LoginWidget.routeName, context.mounted);
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: SvgPicture.asset(
+                                'assets/images/logout.svg',
+                                width: 30.0,
+                                height: 30.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -181,7 +212,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       MyProfileWidget.routeName,
                                       queryParameters: {
                                         'apitoken': serializeParam(
-                                          FFAppState().tokenapi,
+                                          currentAuthenticationToken,
                                           ParamType.String,
                                         ),
                                       }.withoutNulls,
@@ -235,7 +266,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 ShiftDetailsWidget.routeName,
                                 queryParameters: {
                                   'apitoken': serializeParam(
-                                    FFAppState().tokenapi,
+                                    currentAuthenticationToken,
                                     ParamType.String,
                                   ),
                                   'shiftkey': serializeParam(
@@ -305,7 +336,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 ShiftDetailsWidget.routeName,
                                 queryParameters: {
                                   'apitoken': serializeParam(
-                                    widget.apitoken,
+                                    currentAuthenticationToken,
                                     ParamType.String,
                                   ),
                                   'shiftkey': serializeParam(
@@ -369,7 +400,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 ShiftCancelledWidget.routeName,
                                 queryParameters: {
                                   'apitoken': serializeParam(
-                                    widget.apitoken,
+                                    currentAuthenticationToken,
                                     ParamType.String,
                                   ),
                                   'shiftkey': serializeParam(
@@ -479,7 +510,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     SearchJobWidget.routeName,
                                     queryParameters: {
                                       'apitoken': serializeParam(
-                                        FFAppState().tokenapi,
+                                        currentAuthenticationToken,
                                         ParamType.String,
                                       ),
                                     }.withoutNulls,
@@ -557,7 +588,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               SearchJobWidget.routeName,
                                               queryParameters: {
                                                 'apitoken': serializeParam(
-                                                  widget.apitoken,
+                                                  currentAuthenticationToken,
                                                   ParamType.String,
                                                 ),
                                               }.withoutNulls,
@@ -632,7 +663,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     MyShiftsWidget.routeName,
                                     queryParameters: {
                                       'apitoken': serializeParam(
-                                        FFAppState().tokenapi,
+                                        currentAuthenticationToken,
                                         ParamType.String,
                                       ),
                                     }.withoutNulls,
@@ -794,7 +825,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       MyFavouriteWidget.routeName,
                                       queryParameters: {
                                         'apitoken': serializeParam(
-                                          FFAppState().tokenapi,
+                                          currentAuthenticationToken,
                                           ParamType.String,
                                         ),
                                       }.withoutNulls,
@@ -936,7 +967,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   onTap: () async {
                                     _model.checkStatusBefore =
                                         await ClockInStatusCall.call(
-                                      apiToken: FFAppState().tokenapi,
+                                      apiToken: currentAuthenticationToken,
                                     );
 
                                     if ((_model.checkStatusBefore?.succeeded ??
@@ -981,7 +1012,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           T6ClockOutWidget.routeName,
                                           queryParameters: {
                                             'apitoken': serializeParam(
-                                              FFAppState().tokenapi,
+                                              currentAuthenticationToken,
                                               ParamType.String,
                                             ),
                                           }.withoutNulls,
@@ -1028,7 +1059,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           T5ReturnFromBreakWidget.routeName,
                                           queryParameters: {
                                             'apitoken': serializeParam(
-                                              widget.apitoken,
+                                              currentAuthenticationToken,
                                               ParamType.String,
                                             ),
                                           }.withoutNulls,
@@ -1038,7 +1069,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           T1SelectShiftWidget.routeName,
                                           queryParameters: {
                                             'apitoken': serializeParam(
-                                              widget.apitoken,
+                                              currentAuthenticationToken,
                                               ParamType.String,
                                             ),
                                           }.withoutNulls,

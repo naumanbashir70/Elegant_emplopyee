@@ -352,16 +352,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: SearchJobCopyWidget.routeName,
-          path: SearchJobCopyWidget.routePath,
-          builder: (context, params) => SearchJobCopyWidget(
-            apitoken: params.getParam(
-              'apitoken',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
           name: JobDetailsRejWidget.routeName,
           path: JobDetailsRejWidget.routePath,
           builder: (context, params) => JobDetailsRejWidget(
@@ -443,20 +433,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => MyPrefDaysWidget(
             apitoken: params.getParam(
               'apitoken',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: ShiftDetailsCopyWidget.routeName,
-          path: ShiftDetailsCopyWidget.routePath,
-          builder: (context, params) => ShiftDetailsCopyWidget(
-            apitoken: params.getParam(
-              'apitoken',
-              ParamType.String,
-            ),
-            shiftkey: params.getParam(
-              'shiftkey',
               ParamType.String,
             ),
           ),
@@ -561,26 +537,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => TestWidget(),
         ),
         FFRoute(
-          name: T3JobClockInCopyWidget.routeName,
-          path: T3JobClockInCopyWidget.routePath,
-          builder: (context, params) => T3JobClockInCopyWidget(
-            apitoken: params.getParam(
-              'apitoken',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: HomeCopyWidget.routeName,
-          path: HomeCopyWidget.routePath,
-          builder: (context, params) => HomeCopyWidget(
-            apitoken: params.getParam(
-              'apitoken',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
           name: T3JobClockInCopy3Widget.routeName,
           path: T3JobClockInCopy3Widget.routePath,
           builder: (context, params) => T3JobClockInCopy3Widget(
@@ -591,11 +547,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: HomeCopy2Widget.routeName,
-          path: HomeCopy2Widget.routePath,
-          builder: (context, params) => HomeCopy2Widget(
+          name: T2ClockInCopyWidget.routeName,
+          path: T2ClockInCopyWidget.routePath,
+          builder: (context, params) => T2ClockInCopyWidget(
             apitoken: params.getParam(
               'apitoken',
+              ParamType.String,
+            ),
+            title: params.getParam(
+              'title',
+              ParamType.String,
+            ),
+            intime: params.getParam(
+              'intime',
+              ParamType.String,
+            ),
+            jobkey: params.getParam(
+              'jobkey',
+              ParamType.String,
+            ),
+            poscode: params.getParam(
+              'poscode',
+              ParamType.String,
+            ),
+            clientname: params.getParam(
+              'clientname',
               ParamType.String,
             ),
           ),

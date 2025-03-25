@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -193,7 +194,7 @@ class _RejectedJobsWidgetState extends State<RejectedJobsWidget>
                         EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                     child: FutureBuilder<ApiCallResponse>(
                       future: RejectedJobsCall.call(
-                        apiToken: widget.apitoken,
+                        apiToken: currentAuthenticationToken,
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.

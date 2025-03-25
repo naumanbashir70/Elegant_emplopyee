@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/components/featurecoming/featurecoming_widget.dart';
 import '/components/my_address/my_address_widget.dart';
 import '/components/update_p_i_npop/update_p_i_npop_widget.dart';
@@ -10,7 +11,6 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 import 'my_profile_model.dart';
 export 'my_profile_model.dart';
 
@@ -103,8 +103,6 @@ class _MyProfileWidgetState extends State<MyProfileWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -124,7 +122,15 @@ class _MyProfileWidgetState extends State<MyProfileWidget>
               size: 30.0,
             ),
             onPressed: () async {
-              context.pop();
+              context.pushNamed(
+                HomeWidget.routeName,
+                queryParameters: {
+                  'apitoken': serializeParam(
+                    currentAuthenticationToken,
+                    ParamType.String,
+                  ),
+                }.withoutNulls,
+              );
             },
           ),
         ),
@@ -219,7 +225,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget>
                                 MyProfilePhonePicWidget.routeName,
                                 queryParameters: {
                                   'apitoken': serializeParam(
-                                    widget.apitoken,
+                                    currentAuthenticationToken,
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,
@@ -353,7 +359,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget>
                                       alignment: AlignmentDirectional(0.0, 0.0)
                                           .resolve(Directionality.of(context)),
                                       child: MyAddressWidget(
-                                        apItoken: FFAppState().tokenapi,
+                                        apItoken: currentAuthenticationToken!,
                                       ),
                                     );
                                   },
@@ -615,7 +621,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget>
                                 MyProfileUpdateEmailWidget.routeName,
                                 queryParameters: {
                                   'apitoken': serializeParam(
-                                    widget.apitoken,
+                                    currentAuthenticationToken,
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,
@@ -765,7 +771,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget>
                                       alignment: AlignmentDirectional(0.0, 0.0)
                                           .resolve(Directionality.of(context)),
                                       child: UpdatePasswordPopWidget(
-                                        apitoken: widget.apitoken!,
+                                        apitoken: currentAuthenticationToken!,
                                       ),
                                     );
                                   },
@@ -903,7 +909,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget>
                                       alignment: AlignmentDirectional(0.0, 0.0)
                                           .resolve(Directionality.of(context)),
                                       child: UpdatePINpopWidget(
-                                        apitokens: widget.apitoken!,
+                                        apitokens: currentAuthenticationToken!,
                                       ),
                                     );
                                   },

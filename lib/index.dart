@@ -35,7 +35,6 @@ export '/my_profile_update_email/my_profile_update_email_widget.dart'
 export '/other_job/other_job_widget.dart' show OtherJobWidget;
 export '/my_pref_job_cond/my_pref_job_cond_widget.dart'
     show MyPrefJobCondWidget;
-export '/search_job_copy/search_job_copy_widget.dart' show SearchJobCopyWidget;
 export '/job_details_rej/job_details_rej_widget.dart' show JobDetailsRejWidget;
 export '/rejected_jobs/rejected_jobs_widget.dart' show RejectedJobsWidget;
 export '/shift_detailsbackup_may25/shift_detailsbackup_may25_widget.dart'
@@ -45,8 +44,6 @@ export '/job_details_title/job_details_title_widget.dart'
     show JobDetailsTitleWidget;
 export '/my_pref_loc/my_pref_loc_widget.dart' show MyPrefLocWidget;
 export '/my_pref_days/my_pref_days_widget.dart' show MyPrefDaysWidget;
-export '/shift_details_copy/shift_details_copy_widget.dart'
-    show ShiftDetailsCopyWidget;
 export '/t_1_select_shift/t1_select_shift_widget.dart' show T1SelectShiftWidget;
 export '/t_2_clock_in/t2_clock_in_widget.dart' show T2ClockInWidget;
 export '/t_3_job_clock_in/t3_job_clock_in_widget.dart' show T3JobClockInWidget;
@@ -60,9 +57,7 @@ export '/t_7_time_clock_help/t7_time_clock_help_widget.dart'
 export '/t_8_clock_in_history/t8_clock_in_history_widget.dart'
     show T8ClockInHistoryWidget;
 export '/test/test_widget.dart' show TestWidget;
-export '/t_3_job_clock_in_copy/t3_job_clock_in_copy_widget.dart'
-    show T3JobClockInCopyWidget;
-export '/home_copy/home_copy_widget.dart' show HomeCopyWidget;
 export '/t_3_job_clock_in_copy3/t3_job_clock_in_copy3_widget.dart'
     show T3JobClockInCopy3Widget;
-export '/home_copy2/home_copy2_widget.dart' show HomeCopy2Widget;
+export '/t_2_clock_in_copy/t2_clock_in_copy_widget.dart'
+    show T2ClockInCopyWidget;

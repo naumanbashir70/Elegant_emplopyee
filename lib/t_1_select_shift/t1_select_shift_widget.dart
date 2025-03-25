@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -250,7 +251,7 @@ class _T1SelectShiftWidgetState extends State<T1SelectShiftWidget>
                         EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                     child: FutureBuilder<ApiCallResponse>(
                       future: JobByTitleCall.call(
-                        apiToken: widget.apitoken,
+                        apiToken: currentAuthenticationToken,
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
@@ -300,7 +301,7 @@ class _T1SelectShiftWidgetState extends State<T1SelectShiftWidget>
                                           T2ClockInWidget.routeName,
                                           queryParameters: {
                                             'apitoken': serializeParam(
-                                              widget.apitoken,
+                                              currentAuthenticationToken,
                                               ParamType.String,
                                             ),
                                             'title': serializeParam(
@@ -590,7 +591,7 @@ class _T1SelectShiftWidgetState extends State<T1SelectShiftWidget>
                                         T3JobClockInWidget.routeName,
                                         queryParameters: {
                                           'apitoken': serializeParam(
-                                            widget.apitoken,
+                                            currentAuthenticationToken,
                                             ParamType.String,
                                           ),
                                         }.withoutNulls,

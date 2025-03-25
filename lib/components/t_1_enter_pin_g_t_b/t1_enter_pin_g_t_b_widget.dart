@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/invalid_clock_i_n/invalid_clock_i_n_widget.dart';
 import '/components/t_p_sucess_break/t_p_sucess_break_widget.dart';
@@ -206,7 +207,7 @@ class _T1EnterPinGTBWidgetState extends State<T1EnterPinGTBWidget> {
                         if (_model.pinCodeController!.text ==
                             FFAppState().pin) {
                           _model.breakOut = await BreakOutCall.call(
-                            apiToken: FFAppState().tokenapi,
+                            apiToken: currentAuthenticationToken,
                           );
 
                           if ((_model.breakOut?.succeeded ?? true)) {

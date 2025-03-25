@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/invalid_clock_i_n_code/invalid_clock_i_n_code_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -7,7 +8,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 't2_clock_in_model.dart';
 export 't2_clock_in_model.dart';
 
@@ -58,8 +58,6 @@ class _T2ClockInWidgetState extends State<T2ClockInWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -141,7 +139,7 @@ class _T2ClockInWidgetState extends State<T2ClockInWidget> {
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
@@ -437,7 +435,7 @@ class _T2ClockInWidgetState extends State<T2ClockInWidget> {
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             _model.statusCheck = await ClockInStatusCall.call(
-                              apiToken: FFAppState().tokenapi,
+                              apiToken: currentAuthenticationToken,
                             );
 
                             if ((_model.statusCheck?.succeeded ?? true)) {
@@ -449,21 +447,22 @@ class _T2ClockInWidgetState extends State<T2ClockInWidget> {
                                     (_model.statusCheck?.jsonBody ?? ''),
                                     r'''$.allowed_for_clock_in_status''',
                                   )) {
-                                _model.clockIn = await ClockInCall.call(
-                                  apiToken: widget.apitoken,
+                                _model.clockein = await ClockInCall.call(
+                                  apiToken: currentAuthenticationToken,
                                   code: _model.pinCodeController!.text,
                                   positionCode: widget.poscode,
                                 );
 
-                                if ((_model.clockIn?.succeeded ?? true)) {
+                                if ((_model.clockein?.succeeded ?? true)) {
                                   FFAppState().ClockInTime = getJsonField(
-                                    (_model.clockIn?.jsonBody ?? ''),
+                                    (_model.clockein?.jsonBody ?? ''),
                                     r'''$.clocked_in_at''',
                                   ).toString();
                                   FFAppState().CurrentTitle = widget.title!;
                                   FFAppState().clientname = widget.clientname!;
                                   FFAppState().CurrentPosCode =
                                       widget.poscode!;
+                                  safeSetState(() {});
 
                                   context.pushNamed(
                                       T4JobClockedInWidget.routeName);
@@ -631,13 +630,14 @@ class _T2ClockInWidgetState extends State<T2ClockInWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 1.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 10.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Align(
                             alignment: AlignmentDirectional(0.0, 0.0),

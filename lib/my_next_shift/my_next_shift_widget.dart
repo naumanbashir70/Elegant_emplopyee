@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/enter_pin_call_out/enter_pin_call_out_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -50,7 +51,7 @@ class _MyNextShiftWidgetState extends State<MyNextShiftWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder<ApiCallResponse>(
       future: JobDetailsCall.call(
-        apiToken: widget.apitoken,
+        apiToken: currentAuthenticationToken,
         key: widget.shiftkey,
       ),
       builder: (context, snapshot) {
@@ -977,7 +978,7 @@ class _MyNextShiftWidgetState extends State<MyNextShiftWidget> {
                                                       child:
                                                           EnterPinCallOutWidget(
                                                         apkitoken:
-                                                            widget.apitoken!,
+                                                            currentAuthenticationToken!,
                                                         intime: getJsonField(
                                                           myNextShiftJobDetailsResponse
                                                               .jsonBody,

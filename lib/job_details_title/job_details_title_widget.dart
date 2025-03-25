@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/job_accept_pop/job_accept_pop_widget.dart';
 import '/components/job_reject/job_reject_widget.dart';
@@ -53,7 +54,7 @@ class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder<ApiCallResponse>(
       future: JobDetailsCall.call(
-        apiToken: widget.apitoken,
+        apiToken: currentAuthenticationToken,
         key: widget.jobkey,
       ),
       builder: (context, snapshot) {
@@ -839,7 +840,7 @@ class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget> {
                                               AllJobsWidget.routeName,
                                               queryParameters: {
                                                 'apitoken': serializeParam(
-                                                  widget.apitoken,
+                                                  currentAuthenticationToken,
                                                   ParamType.String,
                                                 ),
                                               }.withoutNulls,
@@ -919,7 +920,7 @@ class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget> {
                                                                     context)),
                                                     child: JobRejectWidget(
                                                       apitoken:
-                                                          widget.apitoken!,
+                                                          currentAuthenticationToken!,
                                                       jobkey: widget.jobkey!,
                                                       intime: getJsonField(
                                                         jobDetailsTitleJobDetailsResponse
@@ -983,7 +984,8 @@ class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget> {
                                               _model.apiResult6st =
                                                   await UpdateEmpStatusCall
                                                       .call(
-                                                apiToken: widget.apitoken,
+                                                apiToken:
+                                                    currentAuthenticationToken,
                                                 key: widget.jobkey,
                                                 inTime: getJsonField(
                                                   jobDetailsTitleJobDetailsResponse
@@ -1045,7 +1047,7 @@ class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget> {
                                                   MyShiftsWidget.routeName,
                                                   queryParameters: {
                                                     'apitoken': serializeParam(
-                                                      widget.apitoken,
+                                                      currentAuthenticationToken,
                                                       ParamType.String,
                                                     ),
                                                   }.withoutNulls,

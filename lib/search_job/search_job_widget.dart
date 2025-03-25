@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -214,7 +215,7 @@ class _SearchJobWidgetState extends State<SearchJobWidget>
                                           AlignmentDirectional(0.0, -1.0),
                                       child: FutureBuilder<ApiCallResponse>(
                                         future: DashboardDataCall.call(
-                                          apiToken: widget.apitoken,
+                                          apiToken: currentAuthenticationToken,
                                         ),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
@@ -275,7 +276,7 @@ class _SearchJobWidgetState extends State<SearchJobWidget>
                                                           queryParameters: {
                                                             'apitoken':
                                                                 serializeParam(
-                                                              widget.apitoken,
+                                                              currentAuthenticationToken,
                                                               ParamType.String,
                                                             ),
                                                             'jobkey':
@@ -573,7 +574,7 @@ class _SearchJobWidgetState extends State<SearchJobWidget>
                                 AllJobsWidget.routeName,
                                 queryParameters: {
                                   'apitoken': serializeParam(
-                                    widget.apitoken,
+                                    currentAuthenticationToken,
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,
@@ -599,7 +600,7 @@ class _SearchJobWidgetState extends State<SearchJobWidget>
                                 RejectedJobsWidget.routeName,
                                 queryParameters: {
                                   'apitoken': serializeParam(
-                                    widget.apitoken,
+                                    currentAuthenticationToken,
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,

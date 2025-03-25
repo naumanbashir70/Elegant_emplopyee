@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -9,7 +10,6 @@ import '/index.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:provider/provider.dart';
 import 't3_job_clock_in_copy3_model.dart';
 export 't3_job_clock_in_copy3_model.dart';
 
@@ -51,8 +51,6 @@ class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -229,7 +227,7 @@ class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
                           onCompleted: (_) async {
                             _model.clientDetialbyCodeRes =
                                 await ClientDetailByCodeCall.call(
-                              apiToken: widget.apitoken,
+                              apiToken: currentAuthenticationToken,
                               code: _model.pinCodeController!.text,
                             );
 
@@ -548,7 +546,7 @@ class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             _model.clockInStatus = await ClockInStatusCall.call(
-                              apiToken: widget.apitoken,
+                              apiToken: currentAuthenticationToken,
                             );
 
                             if ((_model.clockInStatus?.succeeded ?? true)) {
@@ -561,7 +559,7 @@ class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
                                     r'''$.allowed_for_clock_in_status''',
                                   )) {
                                 _model.clockInShift = await ClockInCall.call(
-                                  apiToken: FFAppState().tokenapi,
+                                  apiToken: currentAuthenticationToken,
                                   code: _model.pinCodeController!.text,
                                   positionCode: _model.dropDownValue,
                                 );

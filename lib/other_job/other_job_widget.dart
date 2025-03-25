@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -237,7 +238,7 @@ class _OtherJobWidgetState extends State<OtherJobWidget> {
                                     0.0, 10.0, 0.0, 0.0),
                                 child: FutureBuilder<ApiCallResponse>(
                                   future: OtherJobsCall.call(
-                                    apiToken: widget.apitoken,
+                                    apiToken: currentAuthenticationToken,
                                   ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.

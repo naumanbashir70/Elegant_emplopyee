@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/something/something_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -50,7 +51,7 @@ class _JobDetailsRejWidgetState extends State<JobDetailsRejWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder<ApiCallResponse>(
       future: RejectedJobDetailsCall.call(
-        apiToken: widget.apitoken,
+        apiToken: currentAuthenticationToken,
         orderId: widget.orderid,
       ),
       builder: (context, snapshot) {
@@ -789,7 +790,7 @@ class _JobDetailsRejWidgetState extends State<JobDetailsRejWidget> {
                                                 RejectedJobsWidget.routeName,
                                                 queryParameters: {
                                                   'apitoken': serializeParam(
-                                                    widget.apitoken,
+                                                    currentAuthenticationToken,
                                                     ParamType.String,
                                                   ),
                                                 }.withoutNulls,
@@ -855,7 +856,8 @@ class _JobDetailsRejWidgetState extends State<JobDetailsRejWidget> {
                                                 _model.apiResult6st =
                                                     await AcceptRjectedCall
                                                         .call(
-                                                  apiToken: widget.apitoken,
+                                                  apiToken:
+                                                      currentAuthenticationToken,
                                                   orderId: getJsonField(
                                                     jobDetailsRejRejectedJobDetailsResponse
                                                         .jsonBody,
