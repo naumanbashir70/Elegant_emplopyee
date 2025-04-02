@@ -199,6 +199,11 @@ class DashboardDataCall {
           .map((x) => castToType<int>(x))
           .withoutNulls
           .toList();
+  static String? userNotFound(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.errors[:].base''',
+      ));
 }
 
 class PefJobCall {
@@ -1076,6 +1081,12 @@ class ClockInStatusCall {
       alwaysAllowBody: false,
     );
   }
+
+  static String? userNotFoundLogout(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.errors[:].base''',
+      ));
 }
 
 class ClockOutWithoutCodeCall {

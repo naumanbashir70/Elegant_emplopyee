@@ -9,6 +9,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'home_model.dart';
 export 'home_model.dart';
 
@@ -41,9 +42,24 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      Function() _navigate = () {};
       _model.statusCheck = await ClockInStatusCall.call(
         apiToken: currentAuthenticationToken,
       );
+
+      if ((_model.statusCheck?.succeeded ?? true)) {
+        FFAppState().garbage = 'garbage';
+        safeSetState(() {});
+      } else {
+        GoRouter.of(context).prepareAuthEvent();
+        await authManager.signOut();
+        GoRouter.of(context).clearRedirectLocation();
+
+        _navigate =
+            () => context.goNamedAuth(LoginWidget.routeName, context.mounted);
+      }
+
+      _navigate();
     });
 
     animationsMap.addAll({
@@ -107,6 +123,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return FutureBuilder<ApiCallResponse>(
       future: DashboardDataCall.call(
         apiToken: currentAuthenticationToken,
