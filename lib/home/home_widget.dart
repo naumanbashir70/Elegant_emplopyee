@@ -1471,7 +1471,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 10.0, 0.0, 0.0),
                                   child: Text(
-                                    'CALL OUTS',
+                                    'CALL OUT',
                                     style: FlutterFlowTheme.of(context)
                                         .headlineSmall
                                         .override(
