@@ -1538,7 +1538,7 @@ class _HomeWidgetState extends State<HomeWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 10.0, 0.0, 0.0),
                                   child: Text(
-                                    'CALL OUT',
+                                    'CALL OUTS',
                                     style: FlutterFlowTheme.of(context)
                                         .headlineSmall
                                         .override(
