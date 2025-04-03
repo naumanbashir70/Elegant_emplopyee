@@ -4,10 +4,16 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'my_work_history_model.dart';
 export 'my_work_history_model.dart';
 
@@ -27,7 +33,7 @@ class MyWorkHistoryWidget extends StatefulWidget {
 }
 
 class _MyWorkHistoryWidgetState extends State<MyWorkHistoryWidget>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, RouteAware {
   late MyWorkHistoryModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -57,13 +63,55 @@ class _MyWorkHistoryWidgetState extends State<MyWorkHistoryWidget>
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -106,7 +154,7 @@ class _MyWorkHistoryWidgetState extends State<MyWorkHistoryWidget>
                   HomeWidget.routeName,
                   queryParameters: {
                     'apitoken': serializeParam(
-                      widget.apitoken,
+                      widget!.apitoken,
                       ParamType.String,
                     ),
                   }.withoutNulls,
@@ -200,11 +248,44 @@ class _MyWorkHistoryWidgetState extends State<MyWorkHistoryWidget>
                         );
                       }
                       final listViewWorkHistoryResponse = snapshot.data!;
+                      _model.debugBackendQueries[
+                              'WorkHistoryCall_statusCode_ListView_fam8z8ck'] =
+                          debugSerializeParam(
+                        listViewWorkHistoryResponse.statusCode,
+                        ParamType.int,
+                        link:
+                            'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyWorkHistory',
+                        name: 'int',
+                        nullable: false,
+                      );
+                      _model.debugBackendQueries[
+                              'WorkHistoryCall_responseBody_ListView_fam8z8ck'] =
+                          debugSerializeParam(
+                        listViewWorkHistoryResponse.bodyText,
+                        ParamType.String,
+                        link:
+                            'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyWorkHistory',
+                        name: 'String',
+                        nullable: false,
+                      );
+                      debugLogWidgetClass(_model);
 
                       return Builder(
                         builder: (context) {
                           final varWorkHist =
                               listViewWorkHistoryResponse.jsonBody.toList();
+                          _model.debugGeneratorVariables[
+                                  'varWorkHist${varWorkHist.length > 100 ? ' (first 100)' : ''}'] =
+                              debugSerializeParam(
+                            varWorkHist.take(100),
+                            ParamType.JSON,
+                            isList: true,
+                            link:
+                                'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyWorkHistory',
+                            name: 'dynamic',
+                            nullable: false,
+                          );
+                          debugLogWidgetClass(_model);
 
                           return ListView.separated(
                             padding: EdgeInsets.zero,

@@ -19,28 +19,40 @@ class UserStruct extends BaseStruct {
   // "uid" field.
   String? _uid;
   String get uid => _uid ?? '';
-  set uid(String? val) => _uid = val;
+  set uid(String? val) {
+    _uid = val;
+    debugLog();
+  }
 
   bool hasUid() => _uid != null;
 
   // "display_name" field.
   String? _displayName;
   String get displayName => _displayName ?? '';
-  set displayName(String? val) => _displayName = val;
+  set displayName(String? val) {
+    _displayName = val;
+    debugLog();
+  }
 
   bool hasDisplayName() => _displayName != null;
 
   // "create_time" field.
   String? _createTime;
   String get createTime => _createTime ?? '';
-  set createTime(String? val) => _createTime = val;
+  set createTime(String? val) {
+    _createTime = val;
+    debugLog();
+  }
 
   bool hasCreateTime() => _createTime != null;
 
   // "pin" field.
   String? _pin;
   String get pin => _pin ?? '';
-  set pin(String? val) => _pin = val;
+  set pin(String? val) {
+    _pin = val;
+    debugLog();
+  }
 
   bool hasPin() => _pin != null;
 
@@ -104,6 +116,33 @@ class UserStruct extends BaseStruct {
           false,
         ),
       );
+  @override
+  Map<String, DebugDataField> toDebugSerializableMap() => {
+        'uid': debugSerializeParam(
+          uid,
+          ParamType.String,
+          name: 'String',
+          nullable: false,
+        ),
+        'display_name': debugSerializeParam(
+          displayName,
+          ParamType.String,
+          name: 'String',
+          nullable: false,
+        ),
+        'create_time': debugSerializeParam(
+          createTime,
+          ParamType.String,
+          name: 'String',
+          nullable: false,
+        ),
+        'pin': debugSerializeParam(
+          pin,
+          ParamType.String,
+          name: 'String',
+          nullable: false,
+        ),
+      };
 
   @override
   String toString() => 'UserStruct(${toMap()})';

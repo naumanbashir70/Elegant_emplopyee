@@ -7,10 +7,14 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
+import 'package:map_launcher/map_launcher.dart' as $ml;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'shift_detailsbackup_may25_model.dart';
 export 'shift_detailsbackup_may25_model.dart';
 
@@ -33,7 +37,7 @@ class ShiftDetailsbackupMay25Widget extends StatefulWidget {
 }
 
 class _ShiftDetailsbackupMay25WidgetState
-    extends State<ShiftDetailsbackupMay25Widget> {
+    extends State<ShiftDetailsbackupMay25Widget> with RouteAware {
   late ShiftDetailsbackupMay25Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -46,17 +50,59 @@ class _ShiftDetailsbackupMay25WidgetState
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return FutureBuilder<ApiCallResponse>(
       future: JobDetailsCall.call(
-        apiToken: widget.apitoken,
-        key: widget.shiftkey,
+        apiToken: widget!.apitoken,
+        key: widget!.shiftkey,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -76,6 +122,27 @@ class _ShiftDetailsbackupMay25WidgetState
           );
         }
         final shiftDetailsbackupMay25JobDetailsResponse = snapshot.data!;
+        _model.debugBackendQueries[
+                'JobDetailsCall_statusCode_Scaffold_t1ft5oyo'] =
+            debugSerializeParam(
+          shiftDetailsbackupMay25JobDetailsResponse.statusCode,
+          ParamType.int,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=ShiftDetailsbackupMay25',
+          name: 'int',
+          nullable: false,
+        );
+        _model.debugBackendQueries[
+                'JobDetailsCall_responseBody_Scaffold_t1ft5oyo'] =
+            debugSerializeParam(
+          shiftDetailsbackupMay25JobDetailsResponse.bodyText,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=ShiftDetailsbackupMay25',
+          name: 'String',
+          nullable: false,
+        );
+        debugLogWidgetClass(_model);
 
         return Scaffold(
           key: scaffoldKey,
@@ -100,7 +167,7 @@ class _ShiftDetailsbackupMay25WidgetState
                     MyShiftsWidget.routeName,
                     queryParameters: {
                       'apitoken': serializeParam(
-                        widget.apitoken,
+                        widget!.apitoken,
                         ParamType.String,
                       ),
                     }.withoutNulls,
@@ -127,7 +194,7 @@ class _ShiftDetailsbackupMay25WidgetState
                       HomeWidget.routeName,
                       queryParameters: {
                         'apitoken': serializeParam(
-                          widget.apitoken,
+                          widget!.apitoken,
                           ParamType.String,
                         ),
                       }.withoutNulls,
@@ -951,7 +1018,7 @@ class _ShiftDetailsbackupMay25WidgetState
                                                   MyShiftsWidget.routeName,
                                                   queryParameters: {
                                                     'apitoken': serializeParam(
-                                                      widget.apitoken,
+                                                      widget!.apitoken,
                                                       ParamType.String,
                                                     ),
                                                   }.withoutNulls,
@@ -1053,8 +1120,8 @@ class _ShiftDetailsbackupMay25WidgetState
                                                   _model.apiResult6st =
                                                       await UpdateEmpStatusCall
                                                           .call(
-                                                    apiToken: widget.apitoken,
-                                                    key: widget.shiftkey,
+                                                    apiToken: widget!.apitoken,
+                                                    key: widget!.shiftkey,
                                                     inTime: getJsonField(
                                                       shiftDetailsbackupMay25JobDetailsResponse
                                                           .jsonBody,
@@ -1112,7 +1179,7 @@ class _ShiftDetailsbackupMay25WidgetState
                                                       queryParameters: {
                                                         'apitoken':
                                                             serializeParam(
-                                                          widget.apitoken,
+                                                          widget!.apitoken,
                                                           ParamType.String,
                                                         ),
                                                       }.withoutNulls,
@@ -1210,8 +1277,8 @@ class _ShiftDetailsbackupMay25WidgetState
                                                         await UpdateEmpStatusCall
                                                             .call(
                                                       apiToken:
-                                                          widget.apitoken,
-                                                      key: widget.shiftkey,
+                                                          widget!.apitoken,
+                                                      key: widget!.shiftkey,
                                                       inTime: getJsonField(
                                                         shiftDetailsbackupMay25JobDetailsResponse
                                                             .jsonBody,
@@ -1266,7 +1333,7 @@ class _ShiftDetailsbackupMay25WidgetState
                                                         queryParameters: {
                                                           'apitoken':
                                                               serializeParam(
-                                                            widget.apitoken,
+                                                            widget!.apitoken,
                                                             ParamType.String,
                                                           ),
                                                         }.withoutNulls,
@@ -1342,8 +1409,8 @@ class _ShiftDetailsbackupMay25WidgetState
                                                         await UpdateEmpStatusCall
                                                             .call(
                                                       apiToken:
-                                                          widget.apitoken,
-                                                      key: widget.shiftkey,
+                                                          widget!.apitoken,
+                                                      key: widget!.shiftkey,
                                                       inTime: getJsonField(
                                                         shiftDetailsbackupMay25JobDetailsResponse
                                                             .jsonBody,
@@ -1398,7 +1465,7 @@ class _ShiftDetailsbackupMay25WidgetState
                                                         queryParameters: {
                                                           'apitoken':
                                                               serializeParam(
-                                                            widget.apitoken,
+                                                            widget!.apitoken,
                                                             ParamType.String,
                                                           ),
                                                         }.withoutNulls,
@@ -1511,8 +1578,8 @@ class _ShiftDetailsbackupMay25WidgetState
                                                           await UpdateEmpStatusCall
                                                               .call(
                                                         apiToken:
-                                                            widget.apitoken,
-                                                        key: widget.shiftkey,
+                                                            widget!.apitoken,
+                                                        key: widget!.shiftkey,
                                                         inTime: getJsonField(
                                                           shiftDetailsbackupMay25JobDetailsResponse
                                                               .jsonBody,
@@ -1568,7 +1635,7 @@ class _ShiftDetailsbackupMay25WidgetState
                                                           queryParameters: {
                                                             'apitoken':
                                                                 serializeParam(
-                                                              widget.apitoken,
+                                                              widget!.apitoken,
                                                               ParamType.String,
                                                             ),
                                                           }.withoutNulls,
@@ -1654,8 +1721,8 @@ class _ShiftDetailsbackupMay25WidgetState
                                                           await UpdateEmpStatusCall
                                                               .call(
                                                         apiToken:
-                                                            widget.apitoken,
-                                                        key: widget.shiftkey,
+                                                            widget!.apitoken,
+                                                        key: widget!.shiftkey,
                                                         inTime: getJsonField(
                                                           shiftDetailsbackupMay25JobDetailsResponse
                                                               .jsonBody,

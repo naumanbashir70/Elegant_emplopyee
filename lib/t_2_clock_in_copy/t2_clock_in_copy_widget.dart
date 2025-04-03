@@ -5,9 +5,13 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 't2_clock_in_copy_model.dart';
 export 't2_clock_in_copy_model.dart';
 
@@ -36,7 +40,8 @@ class T2ClockInCopyWidget extends StatefulWidget {
   State<T2ClockInCopyWidget> createState() => _T2ClockInCopyWidgetState();
 }
 
-class _T2ClockInCopyWidgetState extends State<T2ClockInCopyWidget> {
+class _T2ClockInCopyWidgetState extends State<T2ClockInCopyWidget>
+    with RouteAware {
   late T2ClockInCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -51,13 +56,55 @@ class _T2ClockInCopyWidgetState extends State<T2ClockInCopyWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -81,7 +128,7 @@ class _T2ClockInCopyWidgetState extends State<T2ClockInCopyWidget> {
                 HomeWidget.routeName,
                 queryParameters: {
                   'apitoken': serializeParam(
-                    widget.apitoken,
+                    widget!.apitoken,
                     ParamType.String,
                   ),
                 }.withoutNulls,
@@ -108,7 +155,7 @@ class _T2ClockInCopyWidgetState extends State<T2ClockInCopyWidget> {
                   HomeWidget.routeName,
                   queryParameters: {
                     'apitoken': serializeParam(
-                      widget.apitoken,
+                      widget!.apitoken,
                       ParamType.String,
                     ),
                   }.withoutNulls,
@@ -172,7 +219,7 @@ class _T2ClockInCopyWidgetState extends State<T2ClockInCopyWidget> {
                                       alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Text(
                                         valueOrDefault<String>(
-                                          widget.clientname,
+                                          widget!.clientname,
                                           'ClientName',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -232,7 +279,7 @@ class _T2ClockInCopyWidgetState extends State<T2ClockInCopyWidget> {
                                     ),
                                     Text(
                                       valueOrDefault<String>(
-                                        widget.intime,
+                                        widget!.intime,
                                         'intime',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -305,7 +352,7 @@ class _T2ClockInCopyWidgetState extends State<T2ClockInCopyWidget> {
                                           0.0, 5.0, 0.0, 0.0),
                                       child: Text(
                                         valueOrDefault<String>(
-                                          widget.title,
+                                          widget!.title,
                                           'Server',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -448,10 +495,10 @@ class _T2ClockInCopyWidgetState extends State<T2ClockInCopyWidget> {
                                     r'''$.allowed_for_clock_in_status''',
                                   )) {
                                 if ((_model.clockIn?.succeeded ?? true)) {
-                                  FFAppState().CurrentTitle = widget.title!;
-                                  FFAppState().clientname = widget.clientname!;
+                                  FFAppState().CurrentTitle = widget!.title!;
+                                  FFAppState().clientname = widget!.clientname!;
                                   FFAppState().CurrentPosCode =
-                                      widget.poscode!;
+                                      widget!.poscode!;
 
                                   context.pushNamed(
                                       T4JobClockedInWidget.routeName);
@@ -476,7 +523,7 @@ class _T2ClockInCopyWidgetState extends State<T2ClockInCopyWidget> {
                                 _model.clockIn = await ClockInCall.call(
                                   apiToken: currentAuthenticationToken,
                                   code: _model.pinCodeController!.text,
-                                  positionCode: widget.poscode,
+                                  positionCode: widget!.poscode,
                                 );
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(

@@ -3,9 +3,11 @@ import '/components/update_address/update_address_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'my_address_model.dart';
 export 'my_address_model.dart';
@@ -22,7 +24,7 @@ class MyAddressWidget extends StatefulWidget {
   State<MyAddressWidget> createState() => _MyAddressWidgetState();
 }
 
-class _MyAddressWidgetState extends State<MyAddressWidget> {
+class _MyAddressWidgetState extends State<MyAddressWidget> with RouteAware {
   late MyAddressModel _model;
 
   @override
@@ -39,13 +41,54 @@ class _MyAddressWidgetState extends State<MyAddressWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.maybeDispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
     context.watch<FFAppState>();
 
     return Align(
@@ -92,7 +135,7 @@ class _MyAddressWidgetState extends State<MyAddressWidget> {
                                 30.0, 0.0, 0.0, 0.0),
                             child: FutureBuilder<ApiCallResponse>(
                               future: DashboardDataCall.call(
-                                apiToken: widget.apItoken,
+                                apiToken: widget!.apItoken,
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -111,6 +154,27 @@ class _MyAddressWidgetState extends State<MyAddressWidget> {
                                 }
                                 final textDashboardDataResponse =
                                     snapshot.data!;
+                                _model.debugBackendQueries[
+                                        'DashboardDataCall_statusCode_Text_0nrfcacx'] =
+                                    debugSerializeParam(
+                                  textDashboardDataResponse.statusCode,
+                                  ParamType.int,
+                                  link:
+                                      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyAddress',
+                                  name: 'int',
+                                  nullable: false,
+                                );
+                                _model.debugBackendQueries[
+                                        'DashboardDataCall_responseBody_Text_0nrfcacx'] =
+                                    debugSerializeParam(
+                                  textDashboardDataResponse.bodyText,
+                                  ParamType.String,
+                                  link:
+                                      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyAddress',
+                                  name: 'String',
+                                  nullable: false,
+                                );
+                                debugLogWidgetClass(_model);
 
                                 return Text(
                                   'UPDATE NEW ADDRESS',

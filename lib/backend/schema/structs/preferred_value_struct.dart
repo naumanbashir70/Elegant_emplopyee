@@ -13,75 +13,131 @@ class PreferredValueStruct extends BaseStruct {
     List<String>? clockInTime,
     List<String>? breakOutTime,
     List<String>? breakInTime,
-  })  : _preferredValue = preferredValue,
-        _preferred = preferred,
-        _testBol = testBol,
-        _clockInTime = clockInTime,
-        _breakOutTime = breakOutTime,
-        _breakInTime = breakInTime;
+  })  : _preferredValue =
+            preferredValue != null ? LoggableList(preferredValue) : null,
+        _preferred = preferred != null ? LoggableList(preferred) : null,
+        _testBol = testBol != null ? LoggableList(testBol) : null,
+        _clockInTime = clockInTime != null ? LoggableList(clockInTime) : null,
+        _breakOutTime =
+            breakOutTime != null ? LoggableList(breakOutTime) : null,
+        _breakInTime = breakInTime != null ? LoggableList(breakInTime) : null;
 
   // "preferredValue" field.
-  List<bool>? _preferredValue;
-  List<bool> get preferredValue => _preferredValue ?? const [];
-  set preferredValue(List<bool>? val) => _preferredValue = val;
+  LoggableList<bool>? _preferredValue;
+  List<bool> get preferredValue =>
+      (_preferredValue ?? LoggableList(const []))..logger = logger;
+  set preferredValue(List<bool>? val) {
+    if (val != null) {
+      _preferredValue = LoggableList(val);
+    } else {
+      _preferredValue = null;
+    }
+    debugLog();
+  }
 
   void updatePreferredValue(Function(List<bool>) updateFn) {
-    updateFn(_preferredValue ??= []);
+    updateFn(_preferredValue ??= LoggableList([]));
+    debugLog();
   }
 
   bool hasPreferredValue() => _preferredValue != null;
 
   // "preferred" field.
-  List<int>? _preferred;
-  List<int> get preferred => _preferred ?? const [];
-  set preferred(List<int>? val) => _preferred = val;
+  LoggableList<int>? _preferred;
+  List<int> get preferred =>
+      (_preferred ?? LoggableList(const []))..logger = logger;
+  set preferred(List<int>? val) {
+    if (val != null) {
+      _preferred = LoggableList(val);
+    } else {
+      _preferred = null;
+    }
+    debugLog();
+  }
 
   void updatePreferred(Function(List<int>) updateFn) {
-    updateFn(_preferred ??= []);
+    updateFn(_preferred ??= LoggableList([]));
+    debugLog();
   }
 
   bool hasPreferred() => _preferred != null;
 
   // "test_bol" field.
-  List<bool>? _testBol;
-  List<bool> get testBol => _testBol ?? const [];
-  set testBol(List<bool>? val) => _testBol = val;
+  LoggableList<bool>? _testBol;
+  List<bool> get testBol =>
+      (_testBol ?? LoggableList(const []))..logger = logger;
+  set testBol(List<bool>? val) {
+    if (val != null) {
+      _testBol = LoggableList(val);
+    } else {
+      _testBol = null;
+    }
+    debugLog();
+  }
 
   void updateTestBol(Function(List<bool>) updateFn) {
-    updateFn(_testBol ??= []);
+    updateFn(_testBol ??= LoggableList([]));
+    debugLog();
   }
 
   bool hasTestBol() => _testBol != null;
 
   // "clockInTime" field.
-  List<String>? _clockInTime;
-  List<String> get clockInTime => _clockInTime ?? const [];
-  set clockInTime(List<String>? val) => _clockInTime = val;
+  LoggableList<String>? _clockInTime;
+  List<String> get clockInTime =>
+      (_clockInTime ?? LoggableList(const []))..logger = logger;
+  set clockInTime(List<String>? val) {
+    if (val != null) {
+      _clockInTime = LoggableList(val);
+    } else {
+      _clockInTime = null;
+    }
+    debugLog();
+  }
 
   void updateClockInTime(Function(List<String>) updateFn) {
-    updateFn(_clockInTime ??= []);
+    updateFn(_clockInTime ??= LoggableList([]));
+    debugLog();
   }
 
   bool hasClockInTime() => _clockInTime != null;
 
   // "BreakOutTime" field.
-  List<String>? _breakOutTime;
-  List<String> get breakOutTime => _breakOutTime ?? const [];
-  set breakOutTime(List<String>? val) => _breakOutTime = val;
+  LoggableList<String>? _breakOutTime;
+  List<String> get breakOutTime =>
+      (_breakOutTime ?? LoggableList(const []))..logger = logger;
+  set breakOutTime(List<String>? val) {
+    if (val != null) {
+      _breakOutTime = LoggableList(val);
+    } else {
+      _breakOutTime = null;
+    }
+    debugLog();
+  }
 
   void updateBreakOutTime(Function(List<String>) updateFn) {
-    updateFn(_breakOutTime ??= []);
+    updateFn(_breakOutTime ??= LoggableList([]));
+    debugLog();
   }
 
   bool hasBreakOutTime() => _breakOutTime != null;
 
   // "BreakInTime" field.
-  List<String>? _breakInTime;
-  List<String> get breakInTime => _breakInTime ?? const [];
-  set breakInTime(List<String>? val) => _breakInTime = val;
+  LoggableList<String>? _breakInTime;
+  List<String> get breakInTime =>
+      (_breakInTime ?? LoggableList(const []))..logger = logger;
+  set breakInTime(List<String>? val) {
+    if (val != null) {
+      _breakInTime = LoggableList(val);
+    } else {
+      _breakInTime = null;
+    }
+    debugLog();
+  }
 
   void updateBreakInTime(Function(List<String>) updateFn) {
-    updateFn(_breakInTime ??= []);
+    updateFn(_breakInTime ??= LoggableList([]));
+    debugLog();
   }
 
   bool hasBreakInTime() => _breakInTime != null;
@@ -176,6 +232,51 @@ class PreferredValueStruct extends BaseStruct {
           true,
         ),
       );
+  @override
+  Map<String, DebugDataField> toDebugSerializableMap() => {
+        'preferredValue': debugSerializeParam(
+          _preferredValue,
+          ParamType.bool,
+          isList: true,
+          name: 'bool',
+          nullable: false,
+        ),
+        'preferred': debugSerializeParam(
+          _preferred,
+          ParamType.int,
+          isList: true,
+          name: 'int',
+          nullable: false,
+        ),
+        'test_bol': debugSerializeParam(
+          _testBol,
+          ParamType.bool,
+          isList: true,
+          name: 'bool',
+          nullable: false,
+        ),
+        'clockInTime': debugSerializeParam(
+          _clockInTime,
+          ParamType.String,
+          isList: true,
+          name: 'String',
+          nullable: false,
+        ),
+        'BreakOutTime': debugSerializeParam(
+          _breakOutTime,
+          ParamType.String,
+          isList: true,
+          name: 'String',
+          nullable: false,
+        ),
+        'BreakInTime': debugSerializeParam(
+          _breakInTime,
+          ParamType.String,
+          isList: true,
+          name: 'String',
+          nullable: false,
+        ),
+      };
 
   @override
   String toString() => 'PreferredValueStruct(${toMap()})';

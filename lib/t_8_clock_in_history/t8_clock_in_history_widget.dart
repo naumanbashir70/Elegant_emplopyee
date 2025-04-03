@@ -2,9 +2,16 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 't8_clock_in_history_model.dart';
 export 't8_clock_in_history_model.dart';
 
@@ -26,7 +33,7 @@ class T8ClockInHistoryWidget extends StatefulWidget {
 }
 
 class _T8ClockInHistoryWidgetState extends State<T8ClockInHistoryWidget>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, RouteAware {
   late T8ClockInHistoryModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -56,13 +63,55 @@ class _T8ClockInHistoryWidgetState extends State<T8ClockInHistoryWidget>
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -86,7 +135,7 @@ class _T8ClockInHistoryWidgetState extends State<T8ClockInHistoryWidget>
                 AllJobsWidget.routeName,
                 queryParameters: {
                   'apitoken': serializeParam(
-                    widget.apitoken,
+                    widget!.apitoken,
                     ParamType.String,
                   ),
                 }.withoutNulls,
@@ -113,7 +162,7 @@ class _T8ClockInHistoryWidgetState extends State<T8ClockInHistoryWidget>
                   HomeWidget.routeName,
                   queryParameters: {
                     'apitoken': serializeParam(
-                      widget.apitoken,
+                      widget!.apitoken,
                       ParamType.String,
                     ),
                   }.withoutNulls,

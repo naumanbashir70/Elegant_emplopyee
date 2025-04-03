@@ -5,9 +5,13 @@ import '/components/t_p_clock_out_success/t_p_clock_out_success_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:ui';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 't2_enter_clock_out_model.dart';
 export 't2_enter_clock_out_model.dart';
 
@@ -23,7 +27,8 @@ class T2EnterClockOutWidget extends StatefulWidget {
   State<T2EnterClockOutWidget> createState() => _T2EnterClockOutWidgetState();
 }
 
-class _T2EnterClockOutWidgetState extends State<T2EnterClockOutWidget> {
+class _T2EnterClockOutWidgetState extends State<T2EnterClockOutWidget>
+    with RouteAware {
   late T2EnterClockOutModel _model;
 
   @override
@@ -42,13 +47,55 @@ class _T2EnterClockOutWidgetState extends State<T2EnterClockOutWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.maybeDispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: Container(

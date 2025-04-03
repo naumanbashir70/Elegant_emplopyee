@@ -1,8 +1,19 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/p_num_update/p_num_update_widget.dart';
+import '/components/ph_error/ph_error_widget.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import '/index.dart';
 import 'enter_pin_profile_num_prim_widget.dart'
     show EnterPinProfileNumPrimWidget;
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class EnterPinProfileNumPrimModel
     extends FlutterFlowModel<EnterPinProfileNumPrimWidget> {
@@ -13,11 +24,23 @@ class EnterPinProfileNumPrimModel
   FocusNode? pinCodeFocusNode;
   String? Function(BuildContext, String?)? pinCodeControllerValidator;
   // Stores action output result for [Backend Call - API (UpdatePhone)] action in Button widget.
-  ApiCallResponse? apiPhoneUpdate;
+  ApiCallResponse? _apiPhoneUpdate;
+  set apiPhoneUpdate(ApiCallResponse? value) {
+    _apiPhoneUpdate = value;
+    debugLogWidgetClass(this);
+  }
 
+  ApiCallResponse? get apiPhoneUpdate => _apiPhoneUpdate;
+
+  final Map<String, DebugDataField> debugGeneratorVariables = {};
+  final Map<String, DebugDataField> debugBackendQueries = {};
+  final Map<String, FlutterFlowModel> widgetBuilderComponents = {};
   @override
   void initState(BuildContext context) {
-    pinCodeController = TextEditingController();
+    pinCodeController = TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(this);
+      });
   }
 
   @override
@@ -25,4 +48,55 @@ class EnterPinProfileNumPrimModel
     pinCodeFocusNode?.dispose();
     pinCodeController?.dispose();
   }
+
+  @override
+  WidgetClassDebugData toWidgetClassDebugData() => WidgetClassDebugData(
+        widgetParameters: {
+          'phonenumber': debugSerializeParam(
+            widget?.phonenumber,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=EnterPinProfileNumPrim',
+            searchReference:
+                'reference=Sh0KFQoLcGhvbmVudW1iZXISBmZoM3ZqcnIECAMgAVAAWgtwaG9uZW51bWJlcg==',
+            name: 'String',
+            nullable: true,
+          )
+        }.withoutNulls,
+        widgetStates: {
+          'pinCodeText': debugSerializeParam(
+            pinCodeController?.text,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=EnterPinProfileNumPrim',
+            name: 'String',
+            nullable: true,
+          )
+        },
+        actionOutputs: {
+          'apiPhoneUpdate': debugSerializeParam(
+            apiPhoneUpdate,
+            ParamType.ApiResponse,
+            link:
+                'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=EnterPinProfileNumPrim',
+            name: 'ApiCallResponse',
+            nullable: true,
+          )
+        },
+        generatorVariables: debugGeneratorVariables,
+        backendQueries: debugBackendQueries,
+        componentStates: {
+          ...widgetBuilderComponents.map(
+            (key, value) => MapEntry(
+              key,
+              value.toWidgetClassDebugData(),
+            ),
+          ),
+        }.withoutNulls,
+        link:
+            'https://app.flutterflow.io/project/elegant-employee-g1luv7/tab=uiBuilder&page=EnterPinProfileNumPrim',
+        searchReference:
+            'reference=OhZFbnRlclBpblByb2ZpbGVOdW1QcmltUABaFkVudGVyUGluUHJvZmlsZU51bVByaW0=',
+        widgetClassName: 'EnterPinProfileNumPrim',
+      );
 }

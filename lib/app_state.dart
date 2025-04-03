@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '/backend/schema/structs/index.dart';
+import '/backend/api_requests/api_manager.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:csv/csv.dart';
 import 'package:synchronized/synchronized.dart';
@@ -20,7 +22,9 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     secureStorage = FlutterSecureStorage();
     await _safeInitAsync(() async {
-      _prefval = await secureStorage.getStringList('ff_prefval') ?? _prefval;
+      _prefval = LoggableList(
+        await secureStorage.getStringList('ff_prefval') ?? _prefval,
+      );
     });
     await _safeInitAsync(() async {
       _image = await secureStorage.getString('ff_image') ?? _image;
@@ -78,11 +82,15 @@ class FFAppState extends ChangeNotifier {
 
   late FlutterSecureStorage secureStorage;
 
-  List<String> _prefval = [];
-  List<String> get prefval => _prefval;
+  late LoggableList<String> _prefval = LoggableList([]);
+  List<String> get prefval => _prefval?..logger = () => debugLogAppState(this);
   set prefval(List<String> value) {
-    _prefval = value;
+    if (value != null) {
+      _prefval = LoggableList(value);
+    }
+
     secureStorage.setStringList('ff_prefval', value);
+    debugLogAppState(this);
   }
 
   void deletePrefval() {
@@ -122,6 +130,7 @@ class FFAppState extends ChangeNotifier {
   set image(String value) {
     _image = value;
     secureStorage.setString('ff_image', value);
+    debugLogAppState(this);
   }
 
   void deleteImage() {
@@ -133,6 +142,7 @@ class FFAppState extends ChangeNotifier {
   set email2(String value) {
     _email2 = value;
     secureStorage.setString('ff_email2', value);
+    debugLogAppState(this);
   }
 
   void deleteEmail2() {
@@ -144,6 +154,7 @@ class FFAppState extends ChangeNotifier {
   set pin(String value) {
     _pin = value;
     secureStorage.setString('ff_pin', value);
+    debugLogAppState(this);
   }
 
   void deletePin() {
@@ -155,6 +166,7 @@ class FFAppState extends ChangeNotifier {
   set pass(String value) {
     _pass = value;
     secureStorage.setString('ff_pass', value);
+    debugLogAppState(this);
   }
 
   void deletePass() {
@@ -166,6 +178,7 @@ class FFAppState extends ChangeNotifier {
   set primarynum(String value) {
     _primarynum = value;
     secureStorage.setString('ff_primarynum', value);
+    debugLogAppState(this);
   }
 
   void deletePrimarynum() {
@@ -177,6 +190,7 @@ class FFAppState extends ChangeNotifier {
   set alternatenum(String value) {
     _alternatenum = value;
     secureStorage.setString('ff_alternatenum', value);
+    debugLogAppState(this);
   }
 
   void deleteAlternatenum() {
@@ -188,6 +202,7 @@ class FFAppState extends ChangeNotifier {
   set tokenapi(String value) {
     _tokenapi = value;
     secureStorage.setString('ff_tokenapi', value);
+    debugLogAppState(this);
   }
 
   void deleteTokenapi() {
@@ -199,6 +214,7 @@ class FFAppState extends ChangeNotifier {
   set ClockInTime(String value) {
     _ClockInTime = value;
     secureStorage.setString('ff_ClockInTime', value);
+    debugLogAppState(this);
   }
 
   void deleteClockInTime() {
@@ -210,6 +226,7 @@ class FFAppState extends ChangeNotifier {
   set BreakOutTime(String value) {
     _BreakOutTime = value;
     secureStorage.setString('ff_BreakOutTime', value);
+    debugLogAppState(this);
   }
 
   void deleteBreakOutTime() {
@@ -221,6 +238,7 @@ class FFAppState extends ChangeNotifier {
   set BreakInTime(String value) {
     _BreakInTime = value;
     secureStorage.setString('ff_BreakInTime', value);
+    debugLogAppState(this);
   }
 
   void deleteBreakInTime() {
@@ -232,6 +250,7 @@ class FFAppState extends ChangeNotifier {
   set CurrentTitle(String value) {
     _CurrentTitle = value;
     secureStorage.setString('ff_CurrentTitle', value);
+    debugLogAppState(this);
   }
 
   void deleteCurrentTitle() {
@@ -243,6 +262,7 @@ class FFAppState extends ChangeNotifier {
   set clientname(String value) {
     _clientname = value;
     secureStorage.setString('ff_clientname', value);
+    debugLogAppState(this);
   }
 
   void deleteClientname() {
@@ -253,6 +273,8 @@ class FFAppState extends ChangeNotifier {
   String get garbage => _garbage;
   set garbage(String value) {
     _garbage = value;
+
+    debugLogAppState(this);
   }
 
   String _CurrentPosCode = '';
@@ -260,11 +282,164 @@ class FFAppState extends ChangeNotifier {
   set CurrentPosCode(String value) {
     _CurrentPosCode = value;
     secureStorage.setString('ff_CurrentPosCode', value);
+    debugLogAppState(this);
   }
 
   void deleteCurrentPosCode() {
     secureStorage.delete(key: 'ff_CurrentPosCode');
   }
+
+  Map<String, DebugDataField> toDebugSerializableMap() => {
+        'prefval': debugSerializeParam(
+          prefval,
+          ParamType.String,
+          isList: true,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=ChsKEwoHcHJlZnZhbBIIejN4ZzJjZXNyBBICCANaB3ByZWZ2YWw=',
+          name: 'String',
+          nullable: false,
+        ),
+        'image': debugSerializeParam(
+          image,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=ChcKEQoFaW1hZ2USCDA5OGFnbGllcgIIBFoFaW1hZ2U=',
+          name: 'String',
+          nullable: false,
+        ),
+        'email2': debugSerializeParam(
+          email2,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=ChgKEgoGZW1haWwyEghqajR2eG4xMXICCANaBmVtYWlsMg==',
+          name: 'String',
+          nullable: false,
+        ),
+        'pin': debugSerializeParam(
+          pin,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference: 'reference=ChcKDwoDcGluEghuZWt2czk1aHICCAN6AFoDcGlu',
+          name: 'String',
+          nullable: false,
+        ),
+        'pass': debugSerializeParam(
+          pass,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference: 'reference=ChYKEAoEcGFzcxIIZXNoa3U3NXdyAggDWgRwYXNz',
+          name: 'String',
+          nullable: false,
+        ),
+        'primarynum': debugSerializeParam(
+          primarynum,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=Ch4KFgoKcHJpbWFyeW51bRIINDU4dGFwMnFyAggDegBaCnByaW1hcnludW0=',
+          name: 'String',
+          nullable: false,
+        ),
+        'alternatenum': debugSerializeParam(
+          alternatenum,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=CiAKGAoMYWx0ZXJuYXRlbnVtEghuaXo4eHIweXICCAN6AFoMYWx0ZXJuYXRlbnVt',
+          name: 'String',
+          nullable: false,
+        ),
+        'tokenapi': debugSerializeParam(
+          tokenapi,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=ChwKFAoIdG9rZW5hcGkSCDN2ZGZ2a2hocgIIA3oAWgh0b2tlbmFwaQ==',
+          name: 'String',
+          nullable: false,
+        ),
+        'ClockInTime': debugSerializeParam(
+          ClockInTime,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=Ch0KFwoLQ2xvY2tJblRpbWUSCGNuMnB0YTl4cgIIA1oLQ2xvY2tJblRpbWU=',
+          name: 'String',
+          nullable: false,
+        ),
+        'BreakOutTime': debugSerializeParam(
+          BreakOutTime,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=Ch4KGAoMQnJlYWtPdXRUaW1lEgg2eWhuNmYzdnICCANaDEJyZWFrT3V0VGltZQ==',
+          name: 'String',
+          nullable: false,
+        ),
+        'BreakInTime': debugSerializeParam(
+          BreakInTime,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=Ch0KFwoLQnJlYWtJblRpbWUSCDl0dmkxZHkwcgIIA1oLQnJlYWtJblRpbWU=',
+          name: 'String',
+          nullable: false,
+        ),
+        'CurrentTitle': debugSerializeParam(
+          CurrentTitle,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=Ch4KGAoMQ3VycmVudFRpdGxlEghoeWNycDB1enICCANaDEN1cnJlbnRUaXRsZQ==',
+          name: 'String',
+          nullable: false,
+        ),
+        'clientname': debugSerializeParam(
+          clientname,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=ChwKFgoKY2xpZW50bmFtZRIIdDI0ZWVucmpyAggDWgpjbGllbnRuYW1l',
+          name: 'String',
+          nullable: false,
+        ),
+        'garbage': debugSerializeParam(
+          garbage,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=ChkKEwoHZ2FyYmFnZRIIOHY4NWh1YWJyAggDWgdnYXJiYWdl',
+          name: 'String',
+          nullable: false,
+        ),
+        'CurrentPosCode': debugSerializeParam(
+          CurrentPosCode,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=appValues&appValuesTab=state',
+          searchReference:
+              'reference=CiIKGgoOQ3VycmVudFBvc0NvZGUSCDB1M21rdTBwcgIIA3oAWg5DdXJyZW50UG9zQ29kZQ==',
+          name: 'String',
+          nullable: false,
+        )
+      };
 }
 
 void _safeInit(Function() initializeField) {

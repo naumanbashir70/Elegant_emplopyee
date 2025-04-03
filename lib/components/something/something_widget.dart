@@ -1,7 +1,11 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'something_model.dart';
 export 'something_model.dart';
 
@@ -12,7 +16,7 @@ class SomethingWidget extends StatefulWidget {
   State<SomethingWidget> createState() => _SomethingWidgetState();
 }
 
-class _SomethingWidgetState extends State<SomethingWidget> {
+class _SomethingWidgetState extends State<SomethingWidget> with RouteAware {
   late SomethingModel _model;
 
   @override
@@ -35,13 +39,55 @@ class _SomethingWidgetState extends State<SomethingWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.maybeDispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: Padding(

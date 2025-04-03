@@ -3,9 +3,13 @@ import '/components/reset_pass_conf/reset_pass_conf_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'reset_model.dart';
 export 'reset_model.dart';
 
@@ -19,7 +23,7 @@ class ResetWidget extends StatefulWidget {
   State<ResetWidget> createState() => _ResetWidgetState();
 }
 
-class _ResetWidgetState extends State<ResetWidget> {
+class _ResetWidgetState extends State<ResetWidget> with RouteAware {
   late ResetModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -29,7 +33,10 @@ class _ResetWidgetState extends State<ResetWidget> {
     super.initState();
     _model = createModel(context, () => ResetModel());
 
-    _model.emailFieldTextController ??= TextEditingController();
+    _model.emailFieldTextController ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.emailFieldFocusNode ??= FocusNode();
 
     _model.pinCodeFocusNode ??= FocusNode();
@@ -37,13 +44,55 @@ class _ResetWidgetState extends State<ResetWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),

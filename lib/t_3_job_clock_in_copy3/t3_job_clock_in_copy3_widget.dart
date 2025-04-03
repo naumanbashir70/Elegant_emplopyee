@@ -6,10 +6,13 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import 'dart:ui';
 import '/index.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 't3_job_clock_in_copy3_model.dart';
 export 't3_job_clock_in_copy3_model.dart';
 
@@ -29,7 +32,8 @@ class T3JobClockInCopy3Widget extends StatefulWidget {
       _T3JobClockInCopy3WidgetState();
 }
 
-class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
+class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget>
+    with RouteAware {
   late T3JobClockInCopy3Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -44,13 +48,55 @@ class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -74,7 +120,7 @@ class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
                 AllJobsWidget.routeName,
                 queryParameters: {
                   'apitoken': serializeParam(
-                    widget.apitoken,
+                    widget!.apitoken,
                     ParamType.String,
                   ),
                 }.withoutNulls,
@@ -101,7 +147,7 @@ class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
                   HomeWidget.routeName,
                   queryParameters: {
                     'apitoken': serializeParam(
-                      widget.apitoken,
+                      widget!.apitoken,
                       ParamType.String,
                     ),
                   }.withoutNulls,
@@ -409,7 +455,8 @@ class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
                       ),
                     ],
                   ),
-                  if (_model.pinCodeController!.text != '')
+                  if (_model.pinCodeController!.text != null &&
+                      _model.pinCodeController!.text != '')
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
@@ -444,7 +491,7 @@ class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
                                 Expanded(
                                   child: FutureBuilder<ApiCallResponse>(
                                     future: ClientDetailByCodeCall.call(
-                                      apiToken: widget.apitoken,
+                                      apiToken: widget!.apitoken,
                                       code: _model.pinCodeController!.text,
                                     ),
                                     builder: (context, snapshot) {
@@ -465,6 +512,29 @@ class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
                                       }
                                       final dropDownClientDetailByCodeResponse =
                                           snapshot.data!;
+                                      _model.debugBackendQueries[
+                                              'ClientDetailByCodeCall_statusCode_DropDown_mklll1tl'] =
+                                          debugSerializeParam(
+                                        dropDownClientDetailByCodeResponse
+                                            .statusCode,
+                                        ParamType.int,
+                                        link:
+                                            'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=T_3_Job_ClockInCopy3',
+                                        name: 'int',
+                                        nullable: false,
+                                      );
+                                      _model.debugBackendQueries[
+                                              'ClientDetailByCodeCall_responseBody_DropDown_mklll1tl'] =
+                                          debugSerializeParam(
+                                        dropDownClientDetailByCodeResponse
+                                            .bodyText,
+                                        ParamType.String,
+                                        link:
+                                            'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=T_3_Job_ClockInCopy3',
+                                        name: 'String',
+                                        nullable: false,
+                                      );
+                                      debugLogWidgetClass(_model);
 
                                       return FlutterFlowDropDown<String>(
                                         controller: _model
@@ -533,7 +603,8 @@ class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
                         ],
                       ),
                     ),
-                  if (_model.pinCodeController!.text != '')
+                  if (_model.pinCodeController!.text != null &&
+                      _model.pinCodeController!.text != '')
                     Align(
                       alignment: AlignmentDirectional(0.0, -1.0),
                       child: Padding(
@@ -749,7 +820,8 @@ class _T3JobClockInCopy3WidgetState extends State<T3JobClockInCopy3Widget> {
                         ),
                       ),
                     ),
-                  if (_model.pinCodeController!.text != '')
+                  if (_model.pinCodeController!.text != null &&
+                      _model.pinCodeController!.text != '')
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(

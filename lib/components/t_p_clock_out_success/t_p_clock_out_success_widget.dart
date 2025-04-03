@@ -1,10 +1,13 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 't_p_clock_out_success_model.dart';
 export 't_p_clock_out_success_model.dart';
@@ -28,7 +31,8 @@ class TPClockOutSuccessWidget extends StatefulWidget {
       _TPClockOutSuccessWidgetState();
 }
 
-class _TPClockOutSuccessWidgetState extends State<TPClockOutSuccessWidget> {
+class _TPClockOutSuccessWidgetState extends State<TPClockOutSuccessWidget>
+    with RouteAware {
   late TPClockOutSuccessModel _model;
 
   @override
@@ -61,13 +65,54 @@ class _TPClockOutSuccessWidgetState extends State<TPClockOutSuccessWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.maybeDispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
     context.watch<FFAppState>();
 
     return Align(
@@ -174,7 +219,7 @@ class _TPClockOutSuccessWidgetState extends State<TPClockOutSuccessWidget> {
                     children: [
                       Text(
                         valueOrDefault<String>(
-                          widget.location,
+                          widget!.location,
                           'Location',
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -185,7 +230,7 @@ class _TPClockOutSuccessWidgetState extends State<TPClockOutSuccessWidget> {
                       ),
                       Text(
                         valueOrDefault<String>(
-                          widget.data,
+                          widget!.data,
                           'date',
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -196,7 +241,7 @@ class _TPClockOutSuccessWidgetState extends State<TPClockOutSuccessWidget> {
                       ),
                       Text(
                         valueOrDefault<String>(
-                          widget.position,
+                          widget!.position,
                           'Position',
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -207,7 +252,7 @@ class _TPClockOutSuccessWidgetState extends State<TPClockOutSuccessWidget> {
                       ),
                       Text(
                         valueOrDefault<String>(
-                          widget.duration,
+                          widget!.duration,
                           'duration',
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(

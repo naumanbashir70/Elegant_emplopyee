@@ -5,10 +5,13 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'shift_details_time_changed_model.dart';
 export 'shift_details_time_changed_model.dart';
 
@@ -29,7 +32,7 @@ class ShiftDetailsTimeChangedWidget extends StatefulWidget {
 }
 
 class _ShiftDetailsTimeChangedWidgetState
-    extends State<ShiftDetailsTimeChangedWidget> {
+    extends State<ShiftDetailsTimeChangedWidget> with RouteAware {
   late ShiftDetailsTimeChangedModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -42,13 +45,55 @@ class _ShiftDetailsTimeChangedWidgetState
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return FutureBuilder<ApiCallResponse>(
       future: DashboardDataCall.call(
         apiToken: currentAuthenticationToken,
@@ -71,6 +116,27 @@ class _ShiftDetailsTimeChangedWidgetState
           );
         }
         final shiftDetailsTimeChangedDashboardDataResponse = snapshot.data!;
+        _model.debugBackendQueries[
+                'DashboardDataCall_statusCode_Scaffold_302w31v6'] =
+            debugSerializeParam(
+          shiftDetailsTimeChangedDashboardDataResponse.statusCode,
+          ParamType.int,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=ShiftDetailsTimeChanged',
+          name: 'int',
+          nullable: false,
+        );
+        _model.debugBackendQueries[
+                'DashboardDataCall_responseBody_Scaffold_302w31v6'] =
+            debugSerializeParam(
+          shiftDetailsTimeChangedDashboardDataResponse.bodyText,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=ShiftDetailsTimeChanged',
+          name: 'String',
+          nullable: false,
+        );
+        debugLogWidgetClass(_model);
 
         return Scaffold(
           key: scaffoldKey,
@@ -114,7 +180,7 @@ class _ShiftDetailsTimeChangedWidgetState
                       HomeWidget.routeName,
                       queryParameters: {
                         'apitoken': serializeParam(
-                          widget.apitoken,
+                          widget!.apitoken,
                           ParamType.String,
                         ),
                       }.withoutNulls,

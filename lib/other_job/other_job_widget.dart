@@ -3,9 +3,13 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'other_job_model.dart';
 export 'other_job_model.dart';
 
@@ -24,7 +28,7 @@ class OtherJobWidget extends StatefulWidget {
   State<OtherJobWidget> createState() => _OtherJobWidgetState();
 }
 
-class _OtherJobWidgetState extends State<OtherJobWidget> {
+class _OtherJobWidgetState extends State<OtherJobWidget> with RouteAware {
   late OtherJobModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -37,13 +41,55 @@ class _OtherJobWidgetState extends State<OtherJobWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -86,7 +132,7 @@ class _OtherJobWidgetState extends State<OtherJobWidget> {
                   HomeWidget.routeName,
                   queryParameters: {
                     'apitoken': serializeParam(
-                      widget.apitoken,
+                      widget!.apitoken,
                       ParamType.String,
                     ),
                   }.withoutNulls,
@@ -257,6 +303,27 @@ class _OtherJobWidgetState extends State<OtherJobWidget> {
                                     }
                                     final listViewOtherJobsResponse =
                                         snapshot.data!;
+                                    _model.debugBackendQueries[
+                                            'OtherJobsCall_statusCode_ListView_906zoys8'] =
+                                        debugSerializeParam(
+                                      listViewOtherJobsResponse.statusCode,
+                                      ParamType.int,
+                                      link:
+                                          'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=OtherJob',
+                                      name: 'int',
+                                      nullable: false,
+                                    );
+                                    _model.debugBackendQueries[
+                                            'OtherJobsCall_responseBody_ListView_906zoys8'] =
+                                        debugSerializeParam(
+                                      listViewOtherJobsResponse.bodyText,
+                                      ParamType.String,
+                                      link:
+                                          'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=OtherJob',
+                                      name: 'String',
+                                      nullable: false,
+                                    );
+                                    debugLogWidgetClass(_model);
 
                                     return Builder(
                                       builder: (context) {
@@ -264,6 +331,18 @@ class _OtherJobWidgetState extends State<OtherJobWidget> {
                                           listViewOtherJobsResponse.jsonBody,
                                           r'''$.jobs''',
                                         ).toList();
+                                        _model.debugGeneratorVariables[
+                                                'jobs${jobs.length > 100 ? ' (first 100)' : ''}'] =
+                                            debugSerializeParam(
+                                          jobs.take(100),
+                                          ParamType.JSON,
+                                          isList: true,
+                                          link:
+                                              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=OtherJob',
+                                          name: 'dynamic',
+                                          nullable: false,
+                                        );
+                                        debugLogWidgetClass(_model);
 
                                         return ListView.builder(
                                           padding: EdgeInsets.zero,

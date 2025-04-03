@@ -2,7 +2,12 @@ import '/components/t_1_no_clock_out_time_copy/t1_no_clock_out_time_copy_widget.
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 't7_time_clock_help_model.dart';
 export 't7_time_clock_help_model.dart';
 
@@ -16,7 +21,8 @@ class T7TimeClockHelpWidget extends StatefulWidget {
   State<T7TimeClockHelpWidget> createState() => _T7TimeClockHelpWidgetState();
 }
 
-class _T7TimeClockHelpWidgetState extends State<T7TimeClockHelpWidget> {
+class _T7TimeClockHelpWidgetState extends State<T7TimeClockHelpWidget>
+    with RouteAware {
   late T7TimeClockHelpModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -29,13 +35,55 @@ class _T7TimeClockHelpWidgetState extends State<T7TimeClockHelpWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),

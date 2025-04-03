@@ -1,7 +1,12 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:ui';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'note_detail_model.dart';
 export 'note_detail_model.dart';
 
@@ -17,7 +22,7 @@ class NoteDetailWidget extends StatefulWidget {
   State<NoteDetailWidget> createState() => _NoteDetailWidgetState();
 }
 
-class _NoteDetailWidgetState extends State<NoteDetailWidget> {
+class _NoteDetailWidgetState extends State<NoteDetailWidget> with RouteAware {
   late NoteDetailModel _model;
 
   @override
@@ -34,13 +39,55 @@ class _NoteDetailWidgetState extends State<NoteDetailWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.maybeDispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Stack(
       children: [
         Align(
@@ -136,7 +183,7 @@ class _NoteDetailWidgetState extends State<NoteDetailWidget> {
                                 children: [
                                   TextSpan(
                                     text: valueOrDefault<String>(
-                                      widget.notes,
+                                      widget!.notes,
                                       'Notes',
                                     ),
                                     style: FlutterFlowTheme.of(context)

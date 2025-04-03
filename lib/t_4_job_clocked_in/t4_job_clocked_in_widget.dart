@@ -6,8 +6,11 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 't4_job_clocked_in_model.dart';
 export 't4_job_clocked_in_model.dart';
@@ -22,7 +25,8 @@ class T4JobClockedInWidget extends StatefulWidget {
   State<T4JobClockedInWidget> createState() => _T4JobClockedInWidgetState();
 }
 
-class _T4JobClockedInWidgetState extends State<T4JobClockedInWidget> {
+class _T4JobClockedInWidgetState extends State<T4JobClockedInWidget>
+    with RouteAware {
   late T4JobClockedInModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -35,13 +39,54 @@ class _T4JobClockedInWidgetState extends State<T4JobClockedInWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
     context.watch<FFAppState>();
 
     return Scaffold(

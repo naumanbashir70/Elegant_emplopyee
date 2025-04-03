@@ -4,9 +4,12 @@ import '/components/invalid_clock_i_n/invalid_clock_i_n_widget.dart';
 import '/components/t_p_sucess_break/t_p_sucess_break_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:ui';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 't1_enter_pin_g_t_b_model.dart';
 export 't1_enter_pin_g_t_b_model.dart';
@@ -23,7 +26,8 @@ class T1EnterPinGTBWidget extends StatefulWidget {
   State<T1EnterPinGTBWidget> createState() => _T1EnterPinGTBWidgetState();
 }
 
-class _T1EnterPinGTBWidgetState extends State<T1EnterPinGTBWidget> {
+class _T1EnterPinGTBWidgetState extends State<T1EnterPinGTBWidget>
+    with RouteAware {
   late T1EnterPinGTBModel _model;
 
   @override
@@ -42,13 +46,54 @@ class _T1EnterPinGTBWidgetState extends State<T1EnterPinGTBWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.maybeDispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
     context.watch<FFAppState>();
 
     return Align(

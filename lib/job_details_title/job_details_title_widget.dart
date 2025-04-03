@@ -8,10 +8,14 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
+import 'dart:ui';
 import '/index.dart';
+import 'package:map_launcher/map_launcher.dart' as $ml;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'job_details_title_model.dart';
 export 'job_details_title_model.dart';
 
@@ -32,7 +36,8 @@ class JobDetailsTitleWidget extends StatefulWidget {
   State<JobDetailsTitleWidget> createState() => _JobDetailsTitleWidgetState();
 }
 
-class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget> {
+class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget>
+    with RouteAware {
   late JobDetailsTitleModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -45,17 +50,59 @@ class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return FutureBuilder<ApiCallResponse>(
       future: JobDetailsCall.call(
         apiToken: currentAuthenticationToken,
-        key: widget.jobkey,
+        key: widget!.jobkey,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -75,6 +122,27 @@ class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget> {
           );
         }
         final jobDetailsTitleJobDetailsResponse = snapshot.data!;
+        _model.debugBackendQueries[
+                'JobDetailsCall_statusCode_Scaffold_aav61ytm'] =
+            debugSerializeParam(
+          jobDetailsTitleJobDetailsResponse.statusCode,
+          ParamType.int,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=JobDetailsTitle',
+          name: 'int',
+          nullable: false,
+        );
+        _model.debugBackendQueries[
+                'JobDetailsCall_responseBody_Scaffold_aav61ytm'] =
+            debugSerializeParam(
+          jobDetailsTitleJobDetailsResponse.bodyText,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=JobDetailsTitle',
+          name: 'String',
+          nullable: false,
+        );
+        debugLogWidgetClass(_model);
 
         return Scaffold(
           key: scaffoldKey,
@@ -99,7 +167,7 @@ class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget> {
                     AllJobsWidget.routeName,
                     queryParameters: {
                       'apitoken': serializeParam(
-                        widget.apitoken,
+                        widget!.apitoken,
                         ParamType.String,
                       ),
                     }.withoutNulls,
@@ -126,7 +194,7 @@ class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget> {
                       HomeWidget.routeName,
                       queryParameters: {
                         'apitoken': serializeParam(
-                          widget.apitoken,
+                          widget!.apitoken,
                           ParamType.String,
                         ),
                       }.withoutNulls,
@@ -921,7 +989,7 @@ class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget> {
                                                     child: JobRejectWidget(
                                                       apitoken:
                                                           currentAuthenticationToken!,
-                                                      jobkey: widget.jobkey!,
+                                                      jobkey: widget!.jobkey!,
                                                       intime: getJsonField(
                                                         jobDetailsTitleJobDetailsResponse
                                                             .jsonBody,
@@ -986,7 +1054,7 @@ class _JobDetailsTitleWidgetState extends State<JobDetailsTitleWidget> {
                                                       .call(
                                                 apiToken:
                                                     currentAuthenticationToken,
-                                                key: widget.jobkey,
+                                                key: widget!.jobkey,
                                                 inTime: getJsonField(
                                                   jobDetailsTitleJobDetailsResponse
                                                       .jsonBody,

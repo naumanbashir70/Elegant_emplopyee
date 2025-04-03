@@ -4,9 +4,12 @@ import '/components/wrong/wrong_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'update_password_pop_copy_model.dart';
 export 'update_password_pop_copy_model.dart';
@@ -25,7 +28,7 @@ class UpdatePasswordPopCopyWidget extends StatefulWidget {
 }
 
 class _UpdatePasswordPopCopyWidgetState
-    extends State<UpdatePasswordPopCopyWidget> {
+    extends State<UpdatePasswordPopCopyWidget> with RouteAware {
   late UpdatePasswordPopCopyModel _model;
 
   @override
@@ -39,27 +42,77 @@ class _UpdatePasswordPopCopyWidgetState
     super.initState();
     _model = createModel(context, () => UpdatePasswordPopCopyModel());
 
-    _model.currPasswordTextController ??= TextEditingController();
+    _model.currPasswordTextController ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.currPasswordFocusNode ??= FocusNode();
 
     _model.pinCodeFocusNode ??= FocusNode();
 
-    _model.newpasswordTextController ??= TextEditingController();
+    _model.newpasswordTextController ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.newpasswordFocusNode ??= FocusNode();
 
-    _model.newpasswordconfTextController ??= TextEditingController();
+    _model.newpasswordconfTextController ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.newpasswordconfFocusNode ??= FocusNode();
   }
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.maybeDispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
     context.watch<FFAppState>();
 
     return Align(
@@ -533,7 +586,7 @@ class _UpdatePasswordPopCopyWidgetState
                         (FFAppState().pass ==
                             _model.currPasswordTextController.text)) {
                       _model.apiResultiet = await UpdatePasswordCall.call(
-                        apiToken: widget.apitoken,
+                        apiToken: widget!.apitoken,
                         newPassword: _model.newpasswordTextController.text,
                         newPasswordConfirmation:
                             _model.newpasswordconfTextController.text,

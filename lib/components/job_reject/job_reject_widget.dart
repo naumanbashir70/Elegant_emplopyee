@@ -2,9 +2,13 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'job_reject_model.dart';
 export 'job_reject_model.dart';
 
@@ -30,7 +34,7 @@ class JobRejectWidget extends StatefulWidget {
   State<JobRejectWidget> createState() => _JobRejectWidgetState();
 }
 
-class _JobRejectWidgetState extends State<JobRejectWidget> {
+class _JobRejectWidgetState extends State<JobRejectWidget> with RouteAware {
   late JobRejectModel _model;
 
   @override
@@ -47,13 +51,55 @@ class _JobRejectWidgetState extends State<JobRejectWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.maybeDispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: Container(
@@ -121,12 +167,12 @@ class _JobRejectWidgetState extends State<JobRejectWidget> {
                       onPressed: () async {
                         _model.apiResult6stCopy =
                             await UpdateEmpStatusCall.call(
-                          apiToken: widget.apitoken,
-                          key: widget.jobkey,
-                          inTime: widget.intime,
-                          outTime: widget.outtime,
-                          date: widget.date,
-                          payRate: widget.payrate,
+                          apiToken: widget!.apitoken,
+                          key: widget!.jobkey,
+                          inTime: widget!.intime,
+                          outTime: widget!.outtime,
+                          date: widget!.date,
+                          payRate: widget!.payrate,
                           status: 'reject',
                         );
 
@@ -135,7 +181,7 @@ class _JobRejectWidgetState extends State<JobRejectWidget> {
                             SearchJobWidget.routeName,
                             queryParameters: {
                               'apitoken': serializeParam(
-                                widget.apitoken,
+                                widget!.apitoken,
                                 ParamType.String,
                               ),
                             }.withoutNulls,

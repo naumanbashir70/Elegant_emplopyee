@@ -6,9 +6,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'my_profile_pic_current_model.dart';
 export 'my_profile_pic_current_model.dart';
 
@@ -28,7 +31,8 @@ class MyProfilePicCurrentWidget extends StatefulWidget {
       _MyProfilePicCurrentWidgetState();
 }
 
-class _MyProfilePicCurrentWidgetState extends State<MyProfilePicCurrentWidget> {
+class _MyProfilePicCurrentWidgetState extends State<MyProfilePicCurrentWidget>
+    with RouteAware {
   late MyProfilePicCurrentModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -41,13 +45,55 @@ class _MyProfilePicCurrentWidgetState extends State<MyProfilePicCurrentWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return FutureBuilder<ApiCallResponse>(
       future: DashboardDataCall.call(
         apiToken: currentAuthenticationToken,
@@ -70,6 +116,27 @@ class _MyProfilePicCurrentWidgetState extends State<MyProfilePicCurrentWidget> {
           );
         }
         final myProfilePicCurrentDashboardDataResponse = snapshot.data!;
+        _model.debugBackendQueries[
+                'DashboardDataCall_statusCode_Scaffold_rbzejte6'] =
+            debugSerializeParam(
+          myProfilePicCurrentDashboardDataResponse.statusCode,
+          ParamType.int,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyProfilePicCurrent',
+          name: 'int',
+          nullable: false,
+        );
+        _model.debugBackendQueries[
+                'DashboardDataCall_responseBody_Scaffold_rbzejte6'] =
+            debugSerializeParam(
+          myProfilePicCurrentDashboardDataResponse.bodyText,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyProfilePicCurrent',
+          name: 'String',
+          nullable: false,
+        );
+        debugLogWidgetClass(_model);
 
         return Scaffold(
           key: scaffoldKey,
@@ -113,7 +180,7 @@ class _MyProfilePicCurrentWidgetState extends State<MyProfilePicCurrentWidget> {
                       HomeWidget.routeName,
                       queryParameters: {
                         'apitoken': serializeParam(
-                          widget.apitoken,
+                          widget!.apitoken,
                           ParamType.String,
                         ),
                       }.withoutNulls,

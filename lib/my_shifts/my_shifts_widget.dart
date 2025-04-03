@@ -4,10 +4,15 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'my_shifts_model.dart';
 export 'my_shifts_model.dart';
@@ -28,7 +33,7 @@ class MyShiftsWidget extends StatefulWidget {
 }
 
 class _MyShiftsWidgetState extends State<MyShiftsWidget>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, RouteAware {
   late MyShiftsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -58,13 +63,54 @@ class _MyShiftsWidgetState extends State<MyShiftsWidget>
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
     context.watch<FFAppState>();
 
     return Scaffold(
@@ -117,7 +163,7 @@ class _MyShiftsWidgetState extends State<MyShiftsWidget>
                   HomeWidget.routeName,
                   queryParameters: {
                     'apitoken': serializeParam(
-                      widget.apitoken,
+                      widget!.apitoken,
                       ParamType.String,
                     ),
                   }.withoutNulls,
@@ -219,6 +265,27 @@ class _MyShiftsWidgetState extends State<MyShiftsWidget>
                           );
                         }
                         final oldDashboardDataResponse = snapshot.data!;
+                        _model.debugBackendQueries[
+                                'DashboardDataCall_statusCode_ListView_9x9pii5l'] =
+                            debugSerializeParam(
+                          oldDashboardDataResponse.statusCode,
+                          ParamType.int,
+                          link:
+                              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyShifts',
+                          name: 'int',
+                          nullable: false,
+                        );
+                        _model.debugBackendQueries[
+                                'DashboardDataCall_responseBody_ListView_9x9pii5l'] =
+                            debugSerializeParam(
+                          oldDashboardDataResponse.bodyText,
+                          ParamType.String,
+                          link:
+                              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyShifts',
+                          name: 'String',
+                          nullable: false,
+                        );
+                        debugLogWidgetClass(_model);
 
                         return Builder(
                           builder: (context) {
@@ -226,6 +293,18 @@ class _MyShiftsWidgetState extends State<MyShiftsWidget>
                               oldDashboardDataResponse.jsonBody,
                               r'''$.myJob''',
                             ).toList();
+                            _model.debugGeneratorVariables[
+                                    'varMyjob${varMyjob.length > 100 ? ' (first 100)' : ''}'] =
+                                debugSerializeParam(
+                              varMyjob.take(100),
+                              ParamType.JSON,
+                              isList: true,
+                              link:
+                                  'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyShifts',
+                              name: 'dynamic',
+                              nullable: false,
+                            );
+                            debugLogWidgetClass(_model);
 
                             return ListView.separated(
                               padding: EdgeInsets.zero,
@@ -256,7 +335,7 @@ class _MyShiftsWidgetState extends State<MyShiftsWidget>
                                           ShiftCancelledWidget.routeName,
                                           queryParameters: {
                                             'apitoken': serializeParam(
-                                              widget.apitoken,
+                                              widget!.apitoken,
                                               ParamType.String,
                                             ),
                                             'shiftkey': serializeParam(
@@ -288,7 +367,7 @@ class _MyShiftsWidgetState extends State<MyShiftsWidget>
                                           MyNextShiftWidget.routeName,
                                           queryParameters: {
                                             'apitoken': serializeParam(
-                                              widget.apitoken,
+                                              widget!.apitoken,
                                               ParamType.String,
                                             ),
                                             'shiftkey': serializeParam(
@@ -305,7 +384,7 @@ class _MyShiftsWidgetState extends State<MyShiftsWidget>
                                           ShiftDetailsWidget.routeName,
                                           queryParameters: {
                                             'apitoken': serializeParam(
-                                              widget.apitoken,
+                                              widget!.apitoken,
                                               ParamType.String,
                                             ),
                                             'shiftkey': serializeParam(

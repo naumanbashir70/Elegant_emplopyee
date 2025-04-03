@@ -4,10 +4,16 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'all_job_title_model.dart';
 export 'all_job_title_model.dart';
 
@@ -29,7 +35,7 @@ class AllJobTitleWidget extends StatefulWidget {
 }
 
 class _AllJobTitleWidgetState extends State<AllJobTitleWidget>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, RouteAware {
   late AllJobTitleModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -59,13 +65,55 @@ class _AllJobTitleWidgetState extends State<AllJobTitleWidget>
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -89,7 +137,7 @@ class _AllJobTitleWidgetState extends State<AllJobTitleWidget>
                 AllJobsWidget.routeName,
                 queryParameters: {
                   'apitoken': serializeParam(
-                    widget.apitoken,
+                    widget!.apitoken,
                     ParamType.String,
                   ),
                 }.withoutNulls,
@@ -116,7 +164,7 @@ class _AllJobTitleWidgetState extends State<AllJobTitleWidget>
                   HomeWidget.routeName,
                   queryParameters: {
                     'apitoken': serializeParam(
-                      widget.apitoken,
+                      widget!.apitoken,
                       ParamType.String,
                     ),
                   }.withoutNulls,
@@ -174,7 +222,7 @@ class _AllJobTitleWidgetState extends State<AllJobTitleWidget>
                                 alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Text(
                                   valueOrDefault<String>(
-                                    widget.title,
+                                    widget!.title,
                                     'Title ',
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -200,7 +248,7 @@ class _AllJobTitleWidgetState extends State<AllJobTitleWidget>
                     child: FutureBuilder<ApiCallResponse>(
                       future: JobByTitleCall.call(
                         apiToken: currentAuthenticationToken,
-                        title: widget.title,
+                        title: widget!.title,
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
@@ -218,6 +266,27 @@ class _AllJobTitleWidgetState extends State<AllJobTitleWidget>
                           );
                         }
                         final listViewJobByTitleResponse = snapshot.data!;
+                        _model.debugBackendQueries[
+                                'JobByTitleCall_statusCode_ListView_akjnmll1'] =
+                            debugSerializeParam(
+                          listViewJobByTitleResponse.statusCode,
+                          ParamType.int,
+                          link:
+                              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=AllJobTitle',
+                          name: 'int',
+                          nullable: false,
+                        );
+                        _model.debugBackendQueries[
+                                'JobByTitleCall_responseBody_ListView_akjnmll1'] =
+                            debugSerializeParam(
+                          listViewJobByTitleResponse.bodyText,
+                          ParamType.String,
+                          link:
+                              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=AllJobTitle',
+                          name: 'String',
+                          nullable: false,
+                        );
+                        debugLogWidgetClass(_model);
 
                         return Builder(
                           builder: (context) {
@@ -225,6 +294,18 @@ class _AllJobTitleWidgetState extends State<AllJobTitleWidget>
                               listViewJobByTitleResponse.jsonBody,
                               r'''$.newJob''',
                             ).toList();
+                            _model.debugGeneratorVariables[
+                                    'newJob${newJob.length > 100 ? ' (first 100)' : ''}'] =
+                                debugSerializeParam(
+                              newJob.take(100),
+                              ParamType.JSON,
+                              isList: true,
+                              link:
+                                  'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=AllJobTitle',
+                              name: 'dynamic',
+                              nullable: false,
+                            );
+                            debugLogWidgetClass(_model);
 
                             return ListView.separated(
                               padding: EdgeInsets.zero,

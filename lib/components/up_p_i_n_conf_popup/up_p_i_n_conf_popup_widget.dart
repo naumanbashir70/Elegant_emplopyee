@@ -1,9 +1,13 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'up_p_i_n_conf_popup_model.dart';
 export 'up_p_i_n_conf_popup_model.dart';
 
@@ -14,7 +18,8 @@ class UpPINConfPopupWidget extends StatefulWidget {
   State<UpPINConfPopupWidget> createState() => _UpPINConfPopupWidgetState();
 }
 
-class _UpPINConfPopupWidgetState extends State<UpPINConfPopupWidget> {
+class _UpPINConfPopupWidgetState extends State<UpPINConfPopupWidget>
+    with RouteAware {
   late UpPINConfPopupModel _model;
 
   @override
@@ -37,13 +42,55 @@ class _UpPINConfPopupWidgetState extends State<UpPINConfPopupWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.maybeDispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: Container(

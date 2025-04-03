@@ -4,8 +4,11 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'my_profile_update_email_model.dart';
 export 'my_profile_update_email_model.dart';
@@ -26,8 +29,8 @@ class MyProfileUpdateEmailWidget extends StatefulWidget {
       _MyProfileUpdateEmailWidgetState();
 }
 
-class _MyProfileUpdateEmailWidgetState
-    extends State<MyProfileUpdateEmailWidget> {
+class _MyProfileUpdateEmailWidgetState extends State<MyProfileUpdateEmailWidget>
+    with RouteAware {
   late MyProfileUpdateEmailModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -37,19 +40,63 @@ class _MyProfileUpdateEmailWidgetState
     super.initState();
     _model = createModel(context, () => MyProfileUpdateEmailModel());
 
-    _model.emailupdateTextController ??= TextEditingController();
+    _model.emailupdateTextController ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.emailupdateFocusNode ??= FocusNode();
   }
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
     context.watch<FFAppState>();
 
     return Scaffold(
@@ -94,7 +141,7 @@ class _MyProfileUpdateEmailWidgetState
                   HomeWidget.routeName,
                   queryParameters: {
                     'apitoken': serializeParam(
-                      widget.apitoken,
+                      widget!.apitoken,
                       ParamType.String,
                     ),
                   }.withoutNulls,

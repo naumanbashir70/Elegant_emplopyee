@@ -4,10 +4,14 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'full_time_job_model.dart';
 export 'full_time_job_model.dart';
 
@@ -26,7 +30,7 @@ class FullTimeJobWidget extends StatefulWidget {
   State<FullTimeJobWidget> createState() => _FullTimeJobWidgetState();
 }
 
-class _FullTimeJobWidgetState extends State<FullTimeJobWidget> {
+class _FullTimeJobWidgetState extends State<FullTimeJobWidget> with RouteAware {
   late FullTimeJobModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -39,16 +43,58 @@ class _FullTimeJobWidgetState extends State<FullTimeJobWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return FutureBuilder<ApiCallResponse>(
       future: DashboardDataCall.call(
-        apiToken: widget.apitoken,
+        apiToken: widget!.apitoken,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -68,6 +114,27 @@ class _FullTimeJobWidgetState extends State<FullTimeJobWidget> {
           );
         }
         final fullTimeJobDashboardDataResponse = snapshot.data!;
+        _model.debugBackendQueries[
+                'DashboardDataCall_statusCode_Scaffold_68c6qhx3'] =
+            debugSerializeParam(
+          fullTimeJobDashboardDataResponse.statusCode,
+          ParamType.int,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=FullTimeJob',
+          name: 'int',
+          nullable: false,
+        );
+        _model.debugBackendQueries[
+                'DashboardDataCall_responseBody_Scaffold_68c6qhx3'] =
+            debugSerializeParam(
+          fullTimeJobDashboardDataResponse.bodyText,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=FullTimeJob',
+          name: 'String',
+          nullable: false,
+        );
+        debugLogWidgetClass(_model);
 
         return Scaffold(
           key: scaffoldKey,
@@ -111,7 +178,7 @@ class _FullTimeJobWidgetState extends State<FullTimeJobWidget> {
                       HomeWidget.routeName,
                       queryParameters: {
                         'apitoken': serializeParam(
-                          widget.apitoken,
+                          widget!.apitoken,
                           ParamType.String,
                         ),
                       }.withoutNulls,

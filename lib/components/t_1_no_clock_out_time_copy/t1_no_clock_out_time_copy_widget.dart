@@ -6,9 +6,13 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import 'dart:ui';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 't1_no_clock_out_time_copy_model.dart';
 export 't1_no_clock_out_time_copy_model.dart';
 
@@ -20,8 +24,8 @@ class T1NoClockOutTimeCopyWidget extends StatefulWidget {
       _T1NoClockOutTimeCopyWidgetState();
 }
 
-class _T1NoClockOutTimeCopyWidgetState
-    extends State<T1NoClockOutTimeCopyWidget> {
+class _T1NoClockOutTimeCopyWidgetState extends State<T1NoClockOutTimeCopyWidget>
+    with RouteAware {
   late T1NoClockOutTimeCopyModel _model;
 
   @override
@@ -35,7 +39,10 @@ class _T1NoClockOutTimeCopyWidgetState
     super.initState();
     _model = createModel(context, () => T1NoClockOutTimeCopyModel());
 
-    _model.textController ??= TextEditingController();
+    _model.textController ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.textFieldFocusNode ??= FocusNode();
 
     _model.pinCodeFocusNode ??= FocusNode();
@@ -43,13 +50,55 @@ class _T1NoClockOutTimeCopyWidgetState
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.maybeDispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: Container(

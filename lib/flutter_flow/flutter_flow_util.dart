@@ -12,6 +12,14 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:map_launcher/map_launcher.dart';
 
+import 'debug_util.dart';
+
+export 'debug_util.dart';
+
+export 'package:debug_panel_proto/debug_panel_proto.dart';
+
+export 'nav/serialization_util.dart';
+
 import '../main.dart';
 
 import 'lat_lng.dart';
@@ -27,6 +35,8 @@ export 'dart:convert' show jsonEncode, jsonDecode;
 export 'package:intl/intl.dart';
 export 'package:page_transition/page_transition.dart';
 export 'nav/nav.dart';
+
+final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
 T valueOrDefault<T>(T? value, T defaultValue) =>
     (value is String && value.isEmpty) || value == null ? defaultValue : value;
@@ -78,7 +88,7 @@ Future launchMap({
     );
   }
   return MapLauncher.showMarker(
-    mapType: mapType,
+    mapType: mapType!,
     coords: coords,
     title: title,
     extraParams: extraParams,

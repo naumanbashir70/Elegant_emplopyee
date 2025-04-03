@@ -1,13 +1,21 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:go_router/go_router.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 import '/backend/schema/structs/index.dart';
 
 import '/auth/custom_auth/custom_auth_user_provider.dart';
 
+import '/main.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'serialization_util.dart';
 
 import '/index.dart';
 
@@ -17,6 +25,99 @@ export 'serialization_util.dart';
 const kTransitionInfoKey = '__transition_info__';
 
 GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
+
+const debugRouteLinkMap = {
+  '/home':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=home',
+  '/searchJob':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=searchJob',
+  '/login':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=login',
+  '/testing':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=testing',
+  '/reset':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=reset',
+  '/myFavourite':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyFavourite',
+  '/nearMyHome':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=NearMyHome',
+  '/myCurrentLocation':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyCurrentLocation',
+  '/nearMe':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=NearMe',
+  '/allJobs':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=AllJobs',
+  '/jobDetails':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=JobDetails',
+  '/myShifts':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyShifts',
+  '/shiftDetailsReconfirm':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=ShiftDetailsReconfirm',
+  '/shiftDetailsTimeChanged':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=ShiftDetailsTimeChanged',
+  '/shiftDetails':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=ShiftDetails',
+  '/shiftCancelled':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=ShiftCancelled',
+  '/fullTimeJob':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=FullTimeJob',
+  '/fullTimeJobDrop':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=FullTimeJobDrop',
+  '/myNextShift':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyNextShift',
+  '/myWorkHistory':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyWorkHistory',
+  '/myProfile':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyProfile',
+  '/myProfilePhoneNum':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyProfilePhoneNum',
+  '/myProfilePhonePic':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyProfilePhonePic',
+  '/myProfilePicCurrent':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyProfilePicCurrent',
+  '/myProfileUpdateEmail':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyProfileUpdateEmail',
+  '/otherJob':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=OtherJob',
+  '/myPrefJobCond':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyPrefJobCond',
+  '/jobDetailsRej':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=JobDetailsRej',
+  '/rejectedJobs':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=RejectedJobs',
+  '/shiftDetailsbackupMay25':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=ShiftDetailsbackupMay25',
+  '/allJobTitle':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=AllJobTitle',
+  '/jobDetailsTitle':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=JobDetailsTitle',
+  '/myPrefLoc':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyPrefLoc',
+  '/myPrefDays':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=MyPrefDays',
+  '/t1SelectShift':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=T_1_SelectShift',
+  '/t2ClockIn':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=T_2_ClockIn',
+  '/t3JobClockIn':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=T_3_Job_ClockIn',
+  '/t4JobClockedIn':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=T_4_Job_ClockedIn',
+  '/t5ReturnFromBreak':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=T_5_ReturnFromBreak',
+  '/t6ClockOut':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=T_6_ClockOut',
+  '/t7TimeClockHelp':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=T_7_TimeClockHelp',
+  '/t8ClockInHistory':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=T_8_ClockInHistory',
+  '/test':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=test',
+  '/t3JobClockInCopy3':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=T_3_Job_ClockInCopy3',
+  '/t2ClockInCopy':
+      'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=T_2_ClockInCopy'
+};
 
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
@@ -577,6 +678,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {

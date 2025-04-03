@@ -4,10 +4,16 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'near_my_home_model.dart';
 export 'near_my_home_model.dart';
 
@@ -27,7 +33,7 @@ class NearMyHomeWidget extends StatefulWidget {
 }
 
 class _NearMyHomeWidgetState extends State<NearMyHomeWidget>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, RouteAware {
   late NearMyHomeModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -57,13 +63,55 @@ class _NearMyHomeWidgetState extends State<NearMyHomeWidget>
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
+
     _model.dispose();
 
     super.dispose();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF10283D),
@@ -106,7 +154,7 @@ class _NearMyHomeWidgetState extends State<NearMyHomeWidget>
                   HomeWidget.routeName,
                   queryParameters: {
                     'apitoken': serializeParam(
-                      widget.apitoken,
+                      widget!.apitoken,
                       ParamType.String,
                     ),
                   }.withoutNulls,
@@ -200,6 +248,27 @@ class _NearMyHomeWidgetState extends State<NearMyHomeWidget>
                         );
                       }
                       final listViewDashboardDataResponse = snapshot.data!;
+                      _model.debugBackendQueries[
+                              'DashboardDataCall_statusCode_ListView_m31awpyn'] =
+                          debugSerializeParam(
+                        listViewDashboardDataResponse.statusCode,
+                        ParamType.int,
+                        link:
+                            'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=NearMyHome',
+                        name: 'int',
+                        nullable: false,
+                      );
+                      _model.debugBackendQueries[
+                              'DashboardDataCall_responseBody_ListView_m31awpyn'] =
+                          debugSerializeParam(
+                        listViewDashboardDataResponse.bodyText,
+                        ParamType.String,
+                        link:
+                            'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=NearMyHome',
+                        name: 'String',
+                        nullable: false,
+                      );
+                      debugLogWidgetClass(_model);
 
                       return Builder(
                         builder: (context) {
@@ -207,6 +276,18 @@ class _NearMyHomeWidgetState extends State<NearMyHomeWidget>
                             listViewDashboardDataResponse.jsonBody,
                             r'''$.newJob''',
                           ).toList();
+                          _model.debugGeneratorVariables[
+                                  'varNearJob${varNearJob.length > 100 ? ' (first 100)' : ''}'] =
+                              debugSerializeParam(
+                            varNearJob.take(100),
+                            ParamType.JSON,
+                            isList: true,
+                            link:
+                                'https://app.flutterflow.io/project/elegant-employee-g1luv7?tab=uiBuilder&page=NearMyHome',
+                            name: 'dynamic',
+                            nullable: false,
+                          );
+                          debugLogWidgetClass(_model);
 
                           return ListView.separated(
                             padding: EdgeInsets.zero,
